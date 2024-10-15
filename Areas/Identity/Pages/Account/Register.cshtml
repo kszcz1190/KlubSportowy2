@@ -4,9 +4,10 @@
     ViewData["Title"] = "Register";
     Layout = "~/Areas/Identity/Pages/_KlubLayout.cshtml";
 }
-
+<link rel="stylesheet" href="~/css/register.css" />
+<div class="container_register">
         <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
-            <h2>Create a new account.</h2>
+            <h2 id="title">Dodawanie zawodnika</h2>
             <hr />
             <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
             <div class="row">
@@ -40,9 +41,9 @@
                 <label asp-for="Input.ConfirmPassword">Confirm Password</label>
                 <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
             </div>
-            <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-primary">Register</button>
+            <button type="submit" class="submit_register">Register</button>
         </form>
-    
+</div>
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />

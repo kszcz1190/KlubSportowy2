@@ -1,0 +1,49 @@
+﻿.container_register {
+    margin: 50px auto;
+    position: relative;
+    background-color: #DBB8EB;
+    border-radius: 50px;
+    display: flex;
+    padding: 20px;
+    justify-content: center;
+    padding: 50px 100px;
+}
+
+.form-floating {
+    display: flex;
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+    .form-floating > label {
+        font-weight: bold;
+        white-space: nowrap;
+        margin-right: 20px;
+    }
+
+    .form-floating div {
+        margin-right: 20px;
+    }
+
+#title {
+    position: absolute;
+    top: -100px;
+    color: white;
+    font-weight: 300;
+}
+
+.submit_register {
+    position: absolute;
+    bottom: -60px;
+    right: 0px;
+    width: 237px;
+    background-color: #370365;
+    border: none;
+    border-radius: 10px;
+    color: white;
+    font-size: 30px;
+}
+
+span {
+    white-space: nowrap;
+}
