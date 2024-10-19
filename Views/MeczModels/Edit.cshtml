@@ -1,0 +1,69 @@
+﻿@model KlubSportowy.Models.MeczModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>MeczModel</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="Druzyna" class="control-label"></label>
+                <input asp-for="Druzyna" class="form-control" />
+                <span asp-validation-for="Druzyna" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DruzynaPrzeciwna" class="control-label"></label>
+                <input asp-for="DruzynaPrzeciwna" class="form-control" />
+                <span asp-validation-for="DruzynaPrzeciwna" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="GoleDruzyna" class="control-label"></label>
+                <input asp-for="GoleDruzyna" class="form-control" />
+                <span asp-validation-for="GoleDruzyna" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="GoleDruzynaPrzeciwna" class="control-label"></label>
+                <input asp-for="GoleDruzynaPrzeciwna" class="form-control" />
+                <span asp-validation-for="GoleDruzynaPrzeciwna" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IloscZoltychKartekDruzyna" class="control-label"></label>
+                <input asp-for="IloscZoltychKartekDruzyna" class="form-control" />
+                <span asp-validation-for="IloscZoltychKartekDruzyna" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IloscZoltychKartekDruzynaPrzeciwna" class="control-label"></label>
+                <input asp-for="IloscZoltychKartekDruzynaPrzeciwna" class="form-control" />
+                <span asp-validation-for="IloscZoltychKartekDruzynaPrzeciwna" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IloscCzerwonychKartekDruzyna" class="control-label"></label>
+                <input asp-for="IloscCzerwonychKartekDruzyna" class="form-control" />
+                <span asp-validation-for="IloscCzerwonychKartekDruzyna" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IloscCzerwonychKartekDruzynaPrzeciwna" class="control-label"></label>
+                <input asp-for="IloscCzerwonychKartekDruzynaPrzeciwna" class="form-control" />
+                <span asp-validation-for="IloscCzerwonychKartekDruzynaPrzeciwna" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,77 @@
+﻿@model IEnumerable<KlubSportowy.Models.MeczModel>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Druzyna)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DruzynaPrzeciwna)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GoleDruzyna)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GoleDruzynaPrzeciwna)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IloscZoltychKartekDruzyna)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IloscZoltychKartekDruzynaPrzeciwna)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IloscCzerwonychKartekDruzyna)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IloscCzerwonychKartekDruzynaPrzeciwna)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Druzyna)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DruzynaPrzeciwna)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GoleDruzyna)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GoleDruzynaPrzeciwna)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IloscZoltychKartekDruzyna)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IloscZoltychKartekDruzynaPrzeciwna)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IloscCzerwonychKartekDruzyna)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IloscCzerwonychKartekDruzynaPrzeciwna)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
