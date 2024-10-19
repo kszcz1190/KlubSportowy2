@@ -1,11 +1,11 @@
 ﻿.container_register {
-    margin: 50px auto;
+    margin: 150px auto;
     position: relative;
     background-color: #DBB8EB;
     border-radius: 50px;
     display: flex;
-    padding: 20px;
     justify-content: center;
+    align-items:center;
     padding: 50px 100px;
 }
 
