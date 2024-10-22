@@ -1,0 +1,9 @@
+﻿h2 {
+    color: white;
+    font-weight: 300;
+    text-align:center;
+}
+
+#buttons_changeData button {
+    padding: 10px;
+}

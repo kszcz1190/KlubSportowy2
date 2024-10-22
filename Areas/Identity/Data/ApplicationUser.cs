@@ -21,5 +21,6 @@ public class ApplicationUser : IdentityUser
     [PersonalData]
     [Column(TypeName = "date")] 
     public DateTime DateOfBirth { get; set; }
+
 }
 

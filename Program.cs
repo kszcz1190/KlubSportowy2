@@ -15,6 +15,7 @@ builder.Services.AddDbContext<AuthDbContext>(options => options.UseMySql(
     new MySqlServerVersion(new Version(10, 6, 16))
 ));
 
+
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
     .AddEntityFrameworkStores<AuthDbContext>()
     .AddDefaultTokenProviders();
