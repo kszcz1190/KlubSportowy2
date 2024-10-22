@@ -5,10 +5,10 @@
     Layout = "~/Areas/Identity/Pages/_KlubLayout.cshtml";
 }
 <link rel="stylesheet" href="~/css/register.css" />
+<h2 id="title">Dodawanie zawodnika</h2>
 <div class="container_register">
         <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
-            <h2 id="title">Dodawanie zawodnika</h2>
-            <hr />
+            
             <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
             <div class="row">
         <div class="col-6">
@@ -31,6 +31,11 @@
                 <label asp-for="Input.Email">Email</label>
                 <span asp-validation-for="Input.Email" class="text-danger"></span>
             </div>
+        <div class="form-floating mb-3">
+            <input asp-for="Input.DateOfBirth" type="date" class="form-control" aria-required="true" placeholder="date of birth" />
+            <label asp-for="Input.DateOfBirth">Date of Birth</label>
+            <span asp-validation-for="Input.DateOfBirth" class="text-danger"></span>
+        </div>
             <div class="form-floating mb-3">
                 <input asp-for="Input.Password" class="form-control" autocomplete="new-password" aria-required="true" placeholder="password" />
                 <label asp-for="Input.Password">Password</label>
@@ -41,6 +46,8 @@
                 <label asp-for="Input.ConfirmPassword">Confirm Password</label>
                 <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
             </div>
+
+            
             <button type="submit" class="submit_register">Register</button>
         </form>
 </div>

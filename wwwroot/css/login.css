@@ -1,8 +1,9 @@
 ﻿.container_login {
     background-color: #DBB8EB;
     border-radius: 50px;
-    width: 472px;
-    height: 346px;
+    width: fit-content;
+    height: 300px;
+    padding:50px;
     margin: 100px auto;
     display: flex;
     justify-content: center;
@@ -12,11 +13,8 @@
 
 input.form-control {
     background-color: #A16ECE;
-    padding: 15px;
+    padding: 5px;
     color: white;
-    font-weight: bold;
-    font-size: large;
-    margin-top: 10px;
 }
 
 
@@ -34,10 +32,9 @@ a {
 .submit_login {
     position: absolute;
     bottom: -20px;
-    left: 90px;
     padding: 10px;
     border-radius: 30px;
-    width: 302px;
+    width: 200px;
     background: rgb(161,110,206);
     background: linear-gradient(180deg, rgba(161,110,206,1) 13%, rgba(219,184,235,1) 100%);
     border: none;
@@ -46,9 +43,9 @@ a {
 
 #icon {
     position: absolute;
-    top: -80px;
-    width: 160px;
-    height: 160px;
+    top: -50px;
+    width: 120px;
+    height: 120px;
     border-radius: 100px;
     background-color: white;
     display: flex;

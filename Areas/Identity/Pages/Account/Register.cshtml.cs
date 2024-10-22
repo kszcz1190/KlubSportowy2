@@ -107,6 +107,11 @@ namespace KlubSportowy.Areas.Identity.Pages.Account
             [Display(Name = "Confirm password")]
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
+
+            [Required]
+            [DataType(DataType.Date)]
+            [Display(Name = "Date of Birth")]
+            public DateTime DateOfBirth { get; set; }
         }
 
 
@@ -130,6 +135,18 @@ namespace KlubSportowy.Areas.Identity.Pages.Account
 
                 user.FirstName = Input.FirstName; 
                 user.LastName = Input.LastName;
+                user.DateOfBirth = Input.DateOfBirth;
+                if (Input.DateOfBirth > DateTime.Today)
+                {
+                    ModelState.AddModelError(string.Empty, "Date of birth cannot be in the future.");
+                    return Page();
+                }
+                var minimumAge = 18;
+                if (Input.DateOfBirth > DateTime.Today.AddYears(-minimumAge))
+                {
+                    ModelState.AddModelError(string.Empty, $"You must be at least {minimumAge} years old to register.");
+                    return Page();
+                }
 
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);

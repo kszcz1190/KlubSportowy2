@@ -1,0 +1,98 @@
+﻿@page
+@inject UserManager<KlubSportowy.Areas.Identity.Data.ApplicationUser> UserManager
+@model KlubSportowy.Areas.Identity.Pages.Mecze.MyStatsModel
+
+@{
+    ViewData["Title"] = "Moje Statystyki";
+    Layout = "~/Areas/Identity/Pages/_KlubLayout.cshtml";
+    var user = await UserManager.GetUserAsync(User);
+    int? age = null;
+
+    if (user?.DateOfBirth != null)
+    {
+        var today = DateTime.Today;
+        age = today.Year - user.DateOfBirth.Year;
+
+        
+        if (user.DateOfBirth > today.AddYears(-age.Value))
+        {
+            age--;
+        }
+    }
+}
+
+<link href="~/css/myStats.css" rel="stylesheet" />
+
+<div id="container_MyStats">
+    <h2>MOJE STATYSTYKI </h2>
+    <div id="personal_data">
+        <a>@user?.FirstName @user?.LastName</a>
+        <a>Wiek: @age?.ToString()</a>
+    </div>
+    <div id="body_MyStats"> 
+        <div id="buttons_MyStats">
+            <button id="showStatsButton" class="bold">Statystyki</button>
+            <button id="showMatchesButton">Mecze</button>
+        </div>
+            <table id="statystyki">
+                <tr>
+                    <td>Występy</td>
+                    <td>Gole</td>
+                    <td>Wygrane</td>
+                    <td>Zremisowane</td>
+                    <td>Porażki</td>
+                    <td>Min na boisku</td>
+                    <td>Czerwone kartki</td>
+                    <td>Żółte kartki</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td> 
+                    <td></td>
+                    <td></td> 
+                    <td></td> 
+                    <td></td> 
+                    <td></td> 
+                    <td></td> 
+                </tr>
+            </table>
+            <table id ="mecze" style="display:none">
+                <tr>
+                    <td>Data</td>
+                    <td>Godzina</td>
+                    <td>Klub</td>
+                    <td>Stadion</td>
+                    <td>Wynik</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+
+@section Scripts {
+    <script>
+        function showStats() {
+            document.getElementById("statystyki").style.display = "block";
+            document.getElementById("mecze").style.display = "none";
+            document.getElementById("showStatsButton").classList.add("bold");
+            document.getElementById("showMatchesButton").classList.remove("bold");
+        }
+
+        function showMatches() {
+            document.getElementById("statystyki").style.display = "none";
+            document.getElementById("mecze").style.display = "block";
+            document.getElementById("showMatchesButton").classList.add("bold");
+            document.getElementById("showStatsButton").classList.remove("bold");
+        }
+
+        document.getElementById("showStatsButton").onclick = showStats;
+        document.getElementById("showMatchesButton").onclick = showMatches;
+    </script>
+}

@@ -1,12 +1,13 @@
 ﻿.container_register {
-    margin: 150px auto;
+    margin: 50px auto;
     position: relative;
     background-color: #DBB8EB;
     border-radius: 50px;
     display: flex;
     justify-content: center;
     align-items:center;
-    padding: 50px 100px;
+    padding: 30px;
+    width: fit-content;
 }
 
 .form-floating {
@@ -25,12 +26,7 @@
         margin-right: 20px;
     }
 
-#title {
-    position: absolute;
-    top: -100px;
-    color: white;
-    font-weight: 300;
-}
+
 
 .submit_register {
     position: absolute;

@@ -1,0 +1,60 @@
+﻿#container_MyStats {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#personal_data {
+    position:absolute;
+    top: -30px;
+    left: -100px;
+}
+    #personal_data a {
+        color: white;
+        font-size: 30px;
+        display:block;
+    }
+
+    h2 {
+        position: absolute;
+        color: white;
+        font-weight: 300;
+        text-align: center;
+        margin: 50px auto;
+    }
+
+#body_MyStats {
+    background-color: #DBB8EB;
+    position: absolute;
+    top: 70px;
+    border-radius:20px;
+    width:1000px;
+}
+
+#buttons_MyStats button {
+    background-color: #DBB8EB;
+    border:none;
+    font-size:30px;
+    border-bottom: 2px solid black;
+    padding:10px;
+    border-top-left-radius:20px;
+}
+#body_MyStats table {
+    width: 100%;
+    table-layout: fixed;
+}
+
+table#mecze {
+    width: 100%;
+    table-layout: fixed;
+}
+
+    #body_MyStats table tr td {
+        font-size: 20px;
+        padding: 10px;
+        text-align: center;
+    }
+
+.bold {
+    font-weight: bold;
+}
