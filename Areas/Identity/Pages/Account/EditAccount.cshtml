@@ -5,7 +5,11 @@
     Layout = "~/Areas/Identity/Pages/_KlubLayout.cshtml";
 }
 
+<link href="~/css/editData.css" rel="stylesheet" />
+
 <h2>EDYCJA DANYCH</h2>
 
-<a asp-page="/Account/ChangePassword">Zmień hasło</a>
-<a asp-page="/Account/ChangeEmail">Zmień e-mail</a>
+<div class="container_dataChange">
+    <a asp-page="/Account/ChangePassword">Zmień hasło</a>
+    <a asp-page="/Account/ChangeEmail">Zmień e-mail</a>
+</div>

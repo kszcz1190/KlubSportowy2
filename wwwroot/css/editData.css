@@ -4,6 +4,54 @@
     text-align:center;
 }
 
-#buttons_changeData button {
-    padding: 10px;
+.container_dataChange{
+    display:flex;
+    justify-content:center;
+    align-items:center;
 }
+
+a {
+    text-decoration: none;
+    color: white;
+    border: 2px solid white;
+    padding: 10px;
+    font-size: 20px;
+    border-radius: 50px;
+    margin: 50px;
+}
+
+a:hover{
+    background-color: aliceblue;
+    color: purple;
+}
+
+.changePassword, .changeEmail {
+    margin: 50px auto;
+    border-radius: 20px;
+    padding: 20px;
+    background-color: #DBB8EB;
+    display: flex;
+    width: fit-content;
+    text-align: center;
+}
+    .changePassword button, .changeEmail button{
+        background-color: #370365;
+        border-radius: 50px;
+        margin-top: 20px;
+        border: none;
+        font-size: 20px;
+        color: white;
+        padding: 10px;
+        width: 150px
+    }
+.form-group{
+    display:flex;
+    margin:10px;
+}
+
+    .form-group label {
+        font-size: 20px;
+        color: white;
+        margin-right: 20px;
+        white-space: nowrap;
+    }
