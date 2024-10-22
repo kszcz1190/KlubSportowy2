@@ -15,6 +15,8 @@
         public int LacznaIloscMeczyRozegranych { get; set; }
         public int LacznaIloscMinutRozegranych { get; set; }
         public int NumerZawodnika { get; set; }
+        public ICollection<StatystykiZawodnikaMeczModel> StatystykiZawodnikaZMeczu { get; set; }
+        // public ICollection<MeczModel> MeczeZawodnika { get; set; }
 
 
     }

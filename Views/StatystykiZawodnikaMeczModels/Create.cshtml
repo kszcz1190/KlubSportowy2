@@ -1,0 +1,71 @@
+﻿@model KlubSportowy.Models.StatystykiZawodnikaMeczModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>StatystykiZawodnikaMeczModel</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="MeczModelId" class="control-label"></label>
+                <select asp-for="MeczModelId" class ="form-control" asp-items="ViewBag.MeczModelId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="ZawodnikModelId" class="control-label"></label>
+                <select asp-for="ZawodnikModelId" class ="form-control" asp-items="ViewBag.ZawodnikModelId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="IloscGoli" class="control-label"></label>
+                <input asp-for="IloscGoli" class="form-control" />
+                <span asp-validation-for="IloscGoli" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IloscZoltychKartek" class="control-label"></label>
+                <input asp-for="IloscZoltychKartek" class="form-control" />
+                <span asp-validation-for="IloscZoltychKartek" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IloscCzerwonychKartek" class="control-label"></label>
+                <input asp-for="IloscCzerwonychKartek" class="form-control" />
+                <span asp-validation-for="IloscCzerwonychKartek" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IloscMinutRozegranych" class="control-label"></label>
+                <input asp-for="IloscMinutRozegranych" class="form-control" />
+                <span asp-validation-for="IloscMinutRozegranych" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="CzyZawodnikZagralWMeczu" /> @Html.DisplayNameFor(model => model.CzyZawodnikZagralWMeczu)
+                </label>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="CzyKapitan" /> @Html.DisplayNameFor(model => model.CzyKapitan)
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="Pozycja" class="control-label"></label>
+                <input asp-for="Pozycja" class="form-control" />
+                <span asp-validation-for="Pozycja" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

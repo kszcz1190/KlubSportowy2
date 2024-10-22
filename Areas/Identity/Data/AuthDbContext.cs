@@ -14,15 +14,26 @@ public class AuthDbContext : IdentityDbContext<ApplicationUser>
     {
     }
 
-    protected override void OnModelCreating(ModelBuilder builder)
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        base.OnModelCreating(builder);
-        // Customize the ASP.NET Identity model and override the defaults if needed.
-        // For example, you can rename the ASP.NET Identity table names and more.
-        // Add your customizations after calling base.OnModelCreating(builder);
+        base.OnModelCreating(modelBuilder);
+
+        modelBuilder.Entity<StatystykiZawodnikaMeczModel>()
+            .HasOne(s => s.MeczModel)
+            .WithMany(m => m.StatystykiZawodnikow)
+            .HasForeignKey(s => s.MeczModelId);
+
+        modelBuilder.Entity<StatystykiZawodnikaMeczModel>()
+            .HasOne(s => s.ZawodnikModel)
+            .WithMany(z => z.StatystykiZawodnikaZMeczu)
+            .HasForeignKey(s => s.ZawodnikModelId);
     }
 
 public DbSet<KlubSportowy.Models.MeczModel> MeczModel { get; set; } = default!;
+
+public DbSet<KlubSportowy.Models.StatystykiZawodnikaMeczModel> StatystykiZawodnikaMeczModel { get; set; } = default!;
+
+public DbSet<KlubSportowy.Models.ZawodnikModel> ZawodnikModel { get; set; } = default!;
 }
 
 

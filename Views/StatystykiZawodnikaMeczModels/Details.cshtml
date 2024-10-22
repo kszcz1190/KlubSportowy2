@@ -1,0 +1,72 @@
+﻿@model KlubSportowy.Models.StatystykiZawodnikaMeczModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>StatystykiZawodnikaMeczModel</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.MeczModel)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.MeczModel.Druzyna)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ZawodnikModel)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ZawodnikModel.Id)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.IloscGoli)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.IloscGoli)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.IloscZoltychKartek)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.IloscZoltychKartek)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.IloscCzerwonychKartek)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.IloscCzerwonychKartek)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.IloscMinutRozegranych)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.IloscMinutRozegranych)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.CzyZawodnikZagralWMeczu)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.CzyZawodnikZagralWMeczu)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.CzyKapitan)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.CzyKapitan)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Pozycja)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Pozycja)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

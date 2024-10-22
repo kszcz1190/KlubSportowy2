@@ -4,6 +4,7 @@ using KlubSportowy.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace KlubSportowy.Migrations
 {
     [DbContext(typeof(AuthDbContext))]
-    partial class AuthDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241022210839_Mecze3")]
+    partial class Mecze3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -377,7 +380,7 @@ namespace KlubSportowy.Migrations
                         .IsRequired();
 
                     b.HasOne("KlubSportowy.Models.ZawodnikModel", "ZawodnikModel")
-                        .WithMany("StatystykiZawodnikaZMeczu")
+                        .WithMany()
                         .HasForeignKey("ZawodnikModelId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -450,11 +453,6 @@ namespace KlubSportowy.Migrations
                     b.Navigation("StatystykiZawodnikow");
 
                     b.Navigation("Zawodnicy");
-                });
-
-            modelBuilder.Entity("KlubSportowy.Models.ZawodnikModel", b =>
-                {
-                    b.Navigation("StatystykiZawodnikaZMeczu");
                 });
 #pragma warning restore 612, 618
         }

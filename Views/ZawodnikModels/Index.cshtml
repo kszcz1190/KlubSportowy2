@@ -1,0 +1,95 @@
+﻿@model IEnumerable<KlubSportowy.Models.ZawodnikModel>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Imie)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Nazwisko)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Wiek)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Kraj)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Pozycja)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LacznaIloscGoli)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LacznaIloscZoltychKartek)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LacznaIloscCzerwonychKartek)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LacznaIloscMeczyRozegranych)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LacznaIloscMinutRozegranych)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NumerZawodnika)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Imie)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nazwisko)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Wiek)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Kraj)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Pozycja)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LacznaIloscGoli)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LacznaIloscZoltychKartek)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LacznaIloscCzerwonychKartek)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LacznaIloscMeczyRozegranych)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LacznaIloscMinutRozegranych)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NumerZawodnika)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

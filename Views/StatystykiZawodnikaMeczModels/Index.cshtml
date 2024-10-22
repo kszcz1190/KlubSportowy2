@@ -1,0 +1,83 @@
+﻿@model IEnumerable<KlubSportowy.Models.StatystykiZawodnikaMeczModel>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.MeczModel)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ZawodnikModel)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IloscGoli)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IloscZoltychKartek)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IloscCzerwonychKartek)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IloscMinutRozegranych)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CzyZawodnikZagralWMeczu)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CzyKapitan)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Pozycja)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.MeczModel.Druzyna)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ZawodnikModel.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IloscGoli)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IloscZoltychKartek)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IloscCzerwonychKartek)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IloscMinutRozegranych)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CzyZawodnikZagralWMeczu)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CzyKapitan)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Pozycja)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

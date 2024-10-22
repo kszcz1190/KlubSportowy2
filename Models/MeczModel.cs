@@ -29,6 +29,9 @@ namespace KlubSportowy.Models
 
         [Range(0, 5, ErrorMessage = "The number of red cards should be between 0 and 5.")]
         public int IloscCzerwonychKartekDruzynaPrzeciwna { get; set; }
+        public ICollection<ZawodnikModel> Zawodnicy { get; set; }
+        public ICollection<StatystykiZawodnikaMeczModel> StatystykiZawodnikow { get; set; } 
+
     }
 }
 
