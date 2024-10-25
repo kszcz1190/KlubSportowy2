@@ -4,6 +4,7 @@ using KlubSportowy.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace KlubSportowy.Migrations
 {
     [DbContext(typeof(AuthDbContext))]
-    partial class AuthDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241025114933_poprawka")]
+    partial class poprawka
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -212,6 +215,9 @@ namespace KlubSportowy.Migrations
                     b.Property<int>("LacznaIloscZoltychKartek")
                         .HasColumnType("int");
 
+                    b.Property<int?>("MeczModelId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Nazwisko")
                         .IsRequired()
                         .HasColumnType("longtext");
@@ -227,6 +233,8 @@ namespace KlubSportowy.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("MeczModelId");
 
                     b.ToTable("ZawodnikModel");
                 });
@@ -382,6 +390,13 @@ namespace KlubSportowy.Migrations
                     b.Navigation("ZawodnikModel");
                 });
 
+            modelBuilder.Entity("KlubSportowy.Models.ZawodnikModel", b =>
+                {
+                    b.HasOne("KlubSportowy.Models.MeczModel", null)
+                        .WithMany("Zawodnicy")
+                        .HasForeignKey("MeczModelId");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -436,6 +451,8 @@ namespace KlubSportowy.Migrations
             modelBuilder.Entity("KlubSportowy.Models.MeczModel", b =>
                 {
                     b.Navigation("StatystykiZawodnikow");
+
+                    b.Navigation("Zawodnicy");
                 });
 
             modelBuilder.Entity("KlubSportowy.Models.ZawodnikModel", b =>

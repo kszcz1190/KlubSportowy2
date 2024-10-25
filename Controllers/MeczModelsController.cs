@@ -56,13 +56,12 @@ namespace KlubSportowy.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Druzyna,DruzynaPrzeciwna,GoleDruzyna,GoleDruzynaPrzeciwna,IloscZoltychKartekDruzyna,IloscZoltychKartekDruzynaPrzeciwna,IloscCzerwonychKartekDruzyna,IloscCzerwonychKartekDruzynaPrzeciwna")] MeczModel meczModel)
         {
-            if (ModelState.IsValid)
-            {
-                _context.Add(meczModel);
+            //if (ModelState.IsValid)
+            //{
+               _context.Add(meczModel);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
-            }
-            return View(meczModel);
+            //return View(meczModel);
         }
 
         // GET: MeczModels/Edit/5

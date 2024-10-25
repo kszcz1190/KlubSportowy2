@@ -61,15 +61,15 @@ namespace KlubSportowy.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,MeczModelId,ZawodnikModelId,IloscGoli,IloscZoltychKartek,IloscCzerwonychKartek,IloscMinutRozegranych,CzyZawodnikZagralWMeczu,CzyKapitan,Pozycja")] StatystykiZawodnikaMeczModel statystykiZawodnikaMeczModel)
         {
-            if (ModelState.IsValid)
-            {
+            //if (ModelState.IsValid)
+            //{
                 _context.Add(statystykiZawodnikaMeczModel);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
-            }
-            ViewData["MeczModelId"] = new SelectList(_context.MeczModel, "Id", "Druzyna", statystykiZawodnikaMeczModel.MeczModelId);
-            ViewData["ZawodnikModelId"] = new SelectList(_context.ZawodnikModel, "Id", "Id", statystykiZawodnikaMeczModel.ZawodnikModelId);
-            return View(statystykiZawodnikaMeczModel);
+            //}
+            //ViewData["MeczModelId"] = new SelectList(_context.MeczModel, "Id", "Druzyna", statystykiZawodnikaMeczModel.MeczModelId);
+            //ViewData["ZawodnikModelId"] = new SelectList(_context.ZawodnikModel, "Id", "Id", statystykiZawodnikaMeczModel.ZawodnikModelId);
+            //return View(statystykiZawodnikaMeczModel);
         }
 
         // GET: StatystykiZawodnikaMeczModels/Edit/5

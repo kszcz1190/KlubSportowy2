@@ -56,13 +56,13 @@ namespace KlubSportowy.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Imie,Nazwisko,Wiek,Kraj,Pozycja,LacznaIloscGoli,LacznaIloscZoltychKartek,LacznaIloscCzerwonychKartek,LacznaIloscMeczyRozegranych,LacznaIloscMinutRozegranych,NumerZawodnika")] ZawodnikModel zawodnikModel)
         {
-            if (ModelState.IsValid)
-            {
+            //if (ModelState.IsValid)
+            //{
                 _context.Add(zawodnikModel);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
-            }
-            return View(zawodnikModel);
+            //}
+            //return View(zawodnikModel);
         }
 
         // GET: ZawodnikModels/Edit/5
