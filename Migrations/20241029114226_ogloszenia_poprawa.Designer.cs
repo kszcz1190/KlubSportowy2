@@ -4,6 +4,7 @@ using KlubSportowy.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace KlubSportowy.Migrations
 {
     [DbContext(typeof(AuthDbContext))]
-    partial class AuthDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241029114226_ogloszenia_poprawa")]
+    partial class ogloszenia_poprawa
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -254,24 +257,6 @@ namespace KlubSportowy.Migrations
                     b.ToTable("ZawodnikModel");
                 });
 
-            modelBuilder.Entity("KlubSportowy.Models.ZawodnikOgloszenie", b =>
-                {
-                    b.Property<string>("ZawodnikId")
-                        .HasColumnType("varchar(255)");
-
-                    b.Property<int>("OgloszenieId")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("IsRead")
-                        .HasColumnType("tinyint(1)");
-
-                    b.HasKey("ZawodnikId", "OgloszenieId");
-
-                    b.HasIndex("OgloszenieId");
-
-                    b.ToTable("ZawodnikOgloszenie");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
                     b.Property<string>("Id")
@@ -423,25 +408,6 @@ namespace KlubSportowy.Migrations
                     b.Navigation("ZawodnikModel");
                 });
 
-            modelBuilder.Entity("KlubSportowy.Models.ZawodnikOgloszenie", b =>
-                {
-                    b.HasOne("KlubSportowy.Models.OgloszeniaModel", "Ogloszenie")
-                        .WithMany("ZawodnikOgloszenie")
-                        .HasForeignKey("OgloszenieId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("KlubSportowy.Areas.Identity.Data.ApplicationUser", "Zawodnik")
-                        .WithMany()
-                        .HasForeignKey("ZawodnikId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Ogloszenie");
-
-                    b.Navigation("Zawodnik");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -496,11 +462,6 @@ namespace KlubSportowy.Migrations
             modelBuilder.Entity("KlubSportowy.Models.MeczModel", b =>
                 {
                     b.Navigation("StatystykiZawodnikow");
-                });
-
-            modelBuilder.Entity("KlubSportowy.Models.OgloszeniaModel", b =>
-                {
-                    b.Navigation("ZawodnikOgloszenie");
                 });
 
             modelBuilder.Entity("KlubSportowy.Models.ZawodnikModel", b =>

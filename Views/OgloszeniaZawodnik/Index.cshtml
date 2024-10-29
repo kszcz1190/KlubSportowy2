@@ -1,0 +1,20 @@
+﻿@using System.Security.Claims
+@model List<KlubSportowy.Models.OgloszeniaModel>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Identity/Pages/_KlubLayout.cshtml";
+}
+<link href="~/css/ads.css" rel="stylesheet" />
+
+<h2>Ogłoszenia</h2>
+<div id="container_OgloszeniaZawodnik">
+    <div class="ogloszenie">
+        @foreach (var ogloszenie in Model)
+        {
+            <div class="ogloszenie-item">
+                <p>@ogloszenie.Tresc</p>
+                <p>Data dodania: @ogloszenie.DataDodania</p>
+            </div>
+        }
+    </div>
+</div>

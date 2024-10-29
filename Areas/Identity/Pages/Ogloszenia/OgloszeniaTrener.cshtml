@@ -1,0 +1,21 @@
+﻿@page
+@model KlubSportowy.Areas.Identity.Pages.Ogloszenia.OgloszeniaTrenerModel
+@{
+    ViewData["Title"] = "Ogloszenia Trener";
+    Layout = "~/Areas/Identity/Pages/_KlubLayout.cshtml";
+}
+<link href="~/css/ads.css" rel="stylesheet" />
+<h2>Ogłoszenia</h2>
+<div id="container_ogloszeniaTrener">
+    <form method="post">
+        <div class="titleAds">
+            <label>TREŚĆ: </label>
+            <textarea asp-for="ogloszeniaVM.Tresc" required rows="1" cols="70"></textarea>
+        </div>
+        <br />
+        <label>Data wygaśnięcia:</label>
+        <input asp-for="ogloszeniaVM.DataUsunieciaOgloszenia" type="date" required />
+
+       <button type="submit" id="buttonOgloszenie">WYŚLIJ</button>
+    </form>
+</div>
