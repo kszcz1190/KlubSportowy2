@@ -1,0 +1,16 @@
+﻿@page
+@model KlubSportowy.Areas.Identity.Pages.Mecze.TestModel
+@using System.Security.Claims
+
+
+@{
+    // Metoda 1: Wyciąganie Id użytkownika bezpośrednio z User.Claims
+    var userIdFromClaims = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+    // Metoda 2: Użycie UserManager, aby uzyskać obiekt użytkownika
+    //var user = await UserManager.GetUserAsync(User);
+    //var userIdFromUserManager = user?.Id;
+}
+
+<h2>Id użytkownika z User.Claims:</h2>
+<p>@userIdFromClaims</p>
