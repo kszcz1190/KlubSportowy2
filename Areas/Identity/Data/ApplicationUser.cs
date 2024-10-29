@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
+using KlubSportowy.Models;
 using Microsoft.AspNetCore.Identity;
 
 namespace KlubSportowy.Areas.Identity.Data;
@@ -21,6 +22,8 @@ public class ApplicationUser : IdentityUser
     [PersonalData]
     [Column(TypeName = "date")] 
     public DateTime DateOfBirth { get; set; }
+
+    public ZawodnikModel ZawodnikModel { get; set; }
 
 }
 

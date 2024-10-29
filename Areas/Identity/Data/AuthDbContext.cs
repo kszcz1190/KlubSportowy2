@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Configuration;
 using KlubSportowy.Models;
 using KlubSportowy.Models.ViewModels;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace KlubSportowy.Data;
 
@@ -29,18 +30,12 @@ public class AuthDbContext : IdentityDbContext<ApplicationUser>
             .WithMany(z => z.StatystykiZawodnikaZMeczu)
             .HasForeignKey(s => s.ZawodnikModelId);
 
-        modelBuilder.Entity<ZawodnikOgloszenie>()
-            .HasKey(zo => new { zo.ZawodnikId, zo.OgloszenieId });
 
-        modelBuilder.Entity<ZawodnikOgloszenie>()
-            .HasOne(zo => zo.Zawodnik)
-            .WithMany()
-            .HasForeignKey(zo => zo.ZawodnikId);
+        modelBuilder.Entity<ApplicationUser>()
+            .HasOne(u => u.ZawodnikModel)
+            .WithOne(p => p.ApplicationUser)
+            .HasForeignKey<ZawodnikModel>(p => p.ApplicationUserId);
 
-        modelBuilder.Entity<ZawodnikOgloszenie>()
-            .HasOne(zo => zo.Ogloszenie)
-            .WithMany(o => o.ZawodnikOgloszenie)
-            .HasForeignKey(zo => zo.OgloszenieId);
     }
 
     public DbSet<KlubSportowy.Models.MeczModel> MeczModel { get; set; } = default!;

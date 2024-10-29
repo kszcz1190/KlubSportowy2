@@ -1,4 +1,7 @@
-﻿namespace KlubSportowy.Models
+﻿using KlubSportowy.Areas.Identity.Data;
+using Microsoft.AspNetCore.Identity;
+
+namespace KlubSportowy.Models
 {
     public class ZawodnikModel
     {
@@ -15,6 +18,10 @@
         public int LacznaIloscMeczyRozegranych { get; set; }
         public int LacznaIloscMinutRozegranych { get; set; }
         public int NumerZawodnika { get; set; }
+        public string? ApplicationUserId { get; set; }
+        public ApplicationUser ApplicationUser { get; set; }
+        //public string? UserId { get; set; }
+        //public IdentityUser? User { get; set; }
         public ICollection<StatystykiZawodnikaMeczModel> StatystykiZawodnikaZMeczu { get; set; }
         // public ICollection<MeczModel> MeczeZawodnika { get; set; }
 

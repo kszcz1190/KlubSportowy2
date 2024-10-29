@@ -22,7 +22,8 @@ namespace KlubSportowy.Controllers
         // GET: ZawodnikModels
         public async Task<IActionResult> Index()
         {
-            return View(await _context.ZawodnikModel.ToListAsync());
+            var authDbContext = _context.ZawodnikModel.Include(z => z.ApplicationUser);
+            return View(await authDbContext.ToListAsync());
         }
 
         // GET: ZawodnikModels/Details/5
@@ -34,6 +35,7 @@ namespace KlubSportowy.Controllers
             }
 
             var zawodnikModel = await _context.ZawodnikModel
+                .Include(z => z.ApplicationUser)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (zawodnikModel == null)
             {
@@ -46,6 +48,7 @@ namespace KlubSportowy.Controllers
         // GET: ZawodnikModels/Create
         public IActionResult Create()
         {
+            ViewData["ApplicationUserId"] = new SelectList(_context.Users, "Id", "Id");
             return View();
         }
 
@@ -54,14 +57,15 @@ namespace KlubSportowy.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Imie,Nazwisko,Wiek,Kraj,Pozycja,LacznaIloscGoli,LacznaIloscZoltychKartek,LacznaIloscCzerwonychKartek,LacznaIloscMeczyRozegranych,LacznaIloscMinutRozegranych,NumerZawodnika")] ZawodnikModel zawodnikModel)
+        public async Task<IActionResult> Create([Bind("Id,Imie,Nazwisko,Wiek,Kraj,Pozycja,LacznaIloscGoli,LacznaIloscZoltychKartek,LacznaIloscCzerwonychKartek,LacznaIloscMeczyRozegranych,LacznaIloscMinutRozegranych,NumerZawodnika,ApplicationUserId")] ZawodnikModel zawodnikModel)
         {
             //if (ModelState.IsValid)
             //{
-                _context.Add(zawodnikModel);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+              _context.Add(zawodnikModel);
+               await _context.SaveChangesAsync();
+               return RedirectToAction(nameof(Index));
             //}
+            //ViewData["ApplicationUserId"] = new SelectList(_context.Users, "Id", "Id", zawodnikModel.ApplicationUserId);
             //return View(zawodnikModel);
         }
 
@@ -78,6 +82,7 @@ namespace KlubSportowy.Controllers
             {
                 return NotFound();
             }
+            ViewData["ApplicationUserId"] = new SelectList(_context.Users, "Id", "Id", zawodnikModel.ApplicationUserId);
             return View(zawodnikModel);
         }
 
@@ -86,7 +91,7 @@ namespace KlubSportowy.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Imie,Nazwisko,Wiek,Kraj,Pozycja,LacznaIloscGoli,LacznaIloscZoltychKartek,LacznaIloscCzerwonychKartek,LacznaIloscMeczyRozegranych,LacznaIloscMinutRozegranych,NumerZawodnika")] ZawodnikModel zawodnikModel)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Imie,Nazwisko,Wiek,Kraj,Pozycja,LacznaIloscGoli,LacznaIloscZoltychKartek,LacznaIloscCzerwonychKartek,LacznaIloscMeczyRozegranych,LacznaIloscMinutRozegranych,NumerZawodnika,ApplicationUserId")] ZawodnikModel zawodnikModel)
         {
             if (id != zawodnikModel.Id)
             {
@@ -113,6 +118,7 @@ namespace KlubSportowy.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["ApplicationUserId"] = new SelectList(_context.Users, "Id", "Id", zawodnikModel.ApplicationUserId);
             return View(zawodnikModel);
         }
 
@@ -125,6 +131,7 @@ namespace KlubSportowy.Controllers
             }
 
             var zawodnikModel = await _context.ZawodnikModel
+                .Include(z => z.ApplicationUser)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (zawodnikModel == null)
             {
