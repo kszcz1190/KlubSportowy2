@@ -1,5 +1,6 @@
 ﻿using KlubSportowy.Data;
 using KlubSportowy.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
@@ -7,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace KlubSportowy.Controllers
 {
+    [Authorize]
     public class OgloszeniaZawodnikController : Controller
     {
         private readonly AuthDbContext _context;
@@ -28,17 +30,31 @@ namespace KlubSportowy.Controllers
         [HttpPost]
         public async Task<IActionResult> MarkAsRead(int id)
         {
-            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier); // Pobierz identyfikator aktualnego użytkownika
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var zawodnikOgloszenie = await _context.ZawodnikOgloszenie
                 .FirstOrDefaultAsync(zo => zo.OgloszenieId == id && zo.ZawodnikId == userId);
 
             if (zawodnikOgloszenie != null)
             {
-                zawodnikOgloszenie.IsRead = true; // Zmiana statusu na przeczytane
-                await _context.SaveChangesAsync(); // Zapisz zmiany w bazie danych
+                zawodnikOgloszenie.IsRead = true;
+                await _context.SaveChangesAsync();
+            }
+            else
+            {
+                // Jeśli rekord nie istnieje, dodaj nowy
+                zawodnikOgloszenie = new ZawodnikOgloszenie
+                {
+                    ZawodnikId = userId,
+                    OgloszenieId = id,
+                    IsRead = true
+                };
+                _context.ZawodnikOgloszenie.Add(zawodnikOgloszenie);
             }
 
-            return RedirectToAction("Index"); // Przekieruj do metody Index
+            await _context.SaveChangesAsync();
+
+            TempData["StatusMessage"] = "Ogłoszenie zostało oznaczone jako przeczytane.";
+            return RedirectToAction("Index");
         }
 
 
@@ -55,13 +71,16 @@ namespace KlubSportowy.Controllers
             if (filter == "Przeczytane")
             {
                 ogloszenia = ogloszenia.Where(o => o.ZawodnikOgloszenie.Any(z => z.ZawodnikId == currentUserId && z.IsRead)).ToList();
+
+
             }
-            else if (filter == "Nieprzeczytane")
+            if (filter == "Nieprzeczytane")
             {
                 ogloszenia = ogloszenia.Where(o => o.ZawodnikOgloszenie.Any(z => z.ZawodnikId == currentUserId && !z.IsRead)).ToList();
             }
 
             return View("Index", ogloszenia);
         }
+
     }
 }

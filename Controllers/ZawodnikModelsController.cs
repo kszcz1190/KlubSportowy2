@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using KlubSportowy.Data;
 using KlubSportowy.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace KlubSportowy.Controllers
 {
+    [Authorize]
     public class ZawodnikModelsController : Controller
     {
         private readonly AuthDbContext _context;

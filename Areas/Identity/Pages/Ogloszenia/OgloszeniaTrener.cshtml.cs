@@ -5,9 +5,12 @@ using KlubSportowy.Models;
 using System.Threading.Tasks;
 using KlubSportowy.Data;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
+using Microsoft.AspNetCore.Authorization; // Dodaj to, aby mieæ dostêp do metod LINQ
 
 namespace KlubSportowy.Areas.Identity.Pages.Ogloszenia
 {
+    [Authorize]
     public class OgloszeniaTrenerModel : PageModel
     {
         private readonly AuthDbContext _context;
@@ -49,8 +52,25 @@ namespace KlubSportowy.Areas.Identity.Pages.Ogloszenia
             _context.OgloszeniaModel.Add(ogloszenie);
             await _context.SaveChangesAsync();
 
+            // Pobierz wszystkich zawodników
+            var zawodnicy = await _context.Users.ToListAsync(); // Upewnij siê, ¿e masz dostêp do u¿ytkowników
+
+            // Przypisanie og³oszenia do wszystkich zawodników z domyœlnym stanem IsRead = false
+            foreach (var zawodnik in zawodnicy)
+            {
+                var zawodnikOgloszenie = new ZawodnikOgloszenie
+                {
+                    ZawodnikId = zawodnik.Id,
+                    OgloszenieId = ogloszenie.Id,
+                    IsRead = false // Ustawienie domyœlne na false
+                };
+
+                _context.ZawodnikOgloszenie.Add(zawodnikOgloszenie);
+            }
+
+            await _context.SaveChangesAsync(); // Zapisz zmiany w kontekœcie
+
             return RedirectToPage("Success"); // Przekierowanie po zapisaniu
         }
     }
 }
-

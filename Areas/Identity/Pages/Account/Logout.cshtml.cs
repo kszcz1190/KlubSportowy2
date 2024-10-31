@@ -13,6 +13,7 @@ using Microsoft.Extensions.Logging;
 
 namespace KlubSportowy.Areas.Identity.Pages.Account
 {
+    [Authorize]
     public class LogoutModel : PageModel
     {
         private readonly SignInManager<ApplicationUser> _signInManager;

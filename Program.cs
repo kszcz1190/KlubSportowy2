@@ -53,6 +53,25 @@ app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
 
+//sprawdzamy czy uzytkownik jest zalogowany
+app.Use(async (context, next) =>
+{
+    if (!context.User.Identity.IsAuthenticated)
+    {
+        if (context.Request.Path.StartsWithSegments("/Identity/Account/Login") ||
+            context.Request.Path.StartsWithSegments("/"))
+        {
+            await next(); 
+            return;
+        }
+
+        context.Response.Redirect("/Identity/Account/Login");
+        return;
+    }
+    await next(); 
+});
+
+
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");

@@ -1,4 +1,5 @@
 using KlubSportowy.Areas.Identity.Data;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -7,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace KlubSportowy.Areas.Identity.Pages.Account
 {
+    [Authorize]
     public class ChangeEmailModel : PageModel
     {
         private readonly UserManager<ApplicationUser> _userManager;

@@ -36,6 +36,20 @@ public class AuthDbContext : IdentityDbContext<ApplicationUser>
             .WithOne(p => p.ApplicationUser)
             .HasForeignKey<ZawodnikModel>(p => p.ApplicationUserId);
 
+
+        modelBuilder.Entity<ZawodnikOgloszenie>()
+    .HasKey(zo => new { zo.ZawodnikId, zo.OgloszenieId });
+
+        modelBuilder.Entity<ZawodnikOgloszenie>()
+            .HasOne(zo => zo.Zawodnik)
+            .WithMany(u => u.ZawodnikOgloszenie) // Dodane powiązanie do kolekcji w ApplicationUser
+            .HasForeignKey(zo => zo.ZawodnikId);
+
+        modelBuilder.Entity<ZawodnikOgloszenie>()
+            .HasOne(zo => zo.Ogloszenie)
+            .WithMany(o => o.ZawodnikOgloszenie)
+            .HasForeignKey(zo => zo.OgloszenieId);
+
     }
 
     public DbSet<KlubSportowy.Models.MeczModel> MeczModel { get; set; } = default!;

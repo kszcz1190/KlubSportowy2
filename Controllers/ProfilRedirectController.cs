@@ -7,8 +7,10 @@ using KlubSportowy.Data; // Namespace z kontekstem bazy danych i modelami
 using KlubSportowy.Models;
 using Microsoft.EntityFrameworkCore; // Namespace z modelem ZawodnikModel
 
+
 public class ProfileRedirectController : Controller
 {
+    
     private readonly AuthDbContext _context;
     private readonly UserManager<ApplicationUser> _userManager;
 
