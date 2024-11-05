@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace KlubSportowy.Migrations
 {
     [DbContext(typeof(AuthDbContext))]
-    [Migration("20241025120338_zmianka")]
-    partial class zmianka
+    [Migration("20241104120427_ogloszenia")]
+    partial class ogloszenia
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -139,6 +139,29 @@ namespace KlubSportowy.Migrations
                     b.ToTable("MeczModel");
                 });
 
+            modelBuilder.Entity("KlubSportowy.Models.OgloszeniaModel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("DataDodania")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<DateTime>("DataUsunieciaOgloszenia")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("Tresc")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("OgloszeniaModel");
+                });
+
             modelBuilder.Entity("KlubSportowy.Models.StatystykiZawodnikaMeczModel", b =>
                 {
                     b.Property<int>("Id")
@@ -192,6 +215,9 @@ namespace KlubSportowy.Migrations
 
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("ApplicationUserId")
+                        .HasColumnType("varchar(255)");
+
                     b.Property<string>("Imie")
                         .IsRequired()
                         .HasColumnType("longtext");
@@ -215,9 +241,6 @@ namespace KlubSportowy.Migrations
                     b.Property<int>("LacznaIloscZoltychKartek")
                         .HasColumnType("int");
 
-                    b.Property<int?>("MeczModelId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Nazwisko")
                         .IsRequired()
                         .HasColumnType("longtext");
@@ -234,9 +257,28 @@ namespace KlubSportowy.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("MeczModelId");
+                    b.HasIndex("ApplicationUserId")
+                        .IsUnique();
 
                     b.ToTable("ZawodnikModel");
+                });
+
+            modelBuilder.Entity("KlubSportowy.Models.ZawodnikOgloszenie", b =>
+                {
+                    b.Property<string>("ZawodnikId")
+                        .HasColumnType("varchar(255)");
+
+                    b.Property<int>("OgloszenieId")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("IsRead")
+                        .HasColumnType("tinyint(1)");
+
+                    b.HasKey("ZawodnikId", "OgloszenieId");
+
+                    b.HasIndex("OgloszenieId");
+
+                    b.ToTable("ZawodnikOgloszenie");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -392,9 +434,30 @@ namespace KlubSportowy.Migrations
 
             modelBuilder.Entity("KlubSportowy.Models.ZawodnikModel", b =>
                 {
-                    b.HasOne("KlubSportowy.Models.MeczModel", null)
-                        .WithMany("Zawodnicy")
-                        .HasForeignKey("MeczModelId");
+                    b.HasOne("KlubSportowy.Areas.Identity.Data.ApplicationUser", "ApplicationUser")
+                        .WithOne("ZawodnikModel")
+                        .HasForeignKey("KlubSportowy.Models.ZawodnikModel", "ApplicationUserId");
+
+                    b.Navigation("ApplicationUser");
+                });
+
+            modelBuilder.Entity("KlubSportowy.Models.ZawodnikOgloszenie", b =>
+                {
+                    b.HasOne("KlubSportowy.Models.OgloszeniaModel", "Ogloszenie")
+                        .WithMany("ZawodnikOgloszenie")
+                        .HasForeignKey("OgloszenieId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("KlubSportowy.Areas.Identity.Data.ApplicationUser", "Zawodnik")
+                        .WithMany("ZawodnikOgloszenie")
+                        .HasForeignKey("ZawodnikId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Ogloszenie");
+
+                    b.Navigation("Zawodnik");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -448,11 +511,22 @@ namespace KlubSportowy.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("KlubSportowy.Areas.Identity.Data.ApplicationUser", b =>
+                {
+                    b.Navigation("ZawodnikModel")
+                        .IsRequired();
+
+                    b.Navigation("ZawodnikOgloszenie");
+                });
+
             modelBuilder.Entity("KlubSportowy.Models.MeczModel", b =>
                 {
                     b.Navigation("StatystykiZawodnikow");
+                });
 
-                    b.Navigation("Zawodnicy");
+            modelBuilder.Entity("KlubSportowy.Models.OgloszeniaModel", b =>
+                {
+                    b.Navigation("ZawodnikOgloszenie");
                 });
 
             modelBuilder.Entity("KlubSportowy.Models.ZawodnikModel", b =>

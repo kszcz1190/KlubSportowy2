@@ -2,9 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using System.Configuration;
 using KlubSportowy.Models;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace KlubSportowy.Data;
 
@@ -19,6 +17,7 @@ public class AuthDbContext : IdentityDbContext<ApplicationUser>
     {
         base.OnModelCreating(modelBuilder);
 
+        // Relacje dla Statystyki Zawodnika Mecz
         modelBuilder.Entity<StatystykiZawodnikaMeczModel>()
             .HasOne(s => s.MeczModel)
             .WithMany(m => m.StatystykiZawodnikow)
@@ -29,18 +28,49 @@ public class AuthDbContext : IdentityDbContext<ApplicationUser>
             .WithMany(z => z.StatystykiZawodnikaZMeczu)
             .HasForeignKey(s => s.ZawodnikModelId);
 
+        // Relacja pomiędzy ApplicationUser a ZawodnikModel
         modelBuilder.Entity<ApplicationUser>()
             .HasOne(u => u.ZawodnikModel)
-            .WithOne(p => p.ApplicationUser)
-            .HasForeignKey<ZawodnikModel>(p => p.ApplicationUserId);
+            .WithOne(z => z.ApplicationUser)
+            .HasForeignKey<ZawodnikModel>(z => z.ApplicationUserId);
+
+        // Klucz złożony dla ZawodnikOgloszenie
+        modelBuilder.Entity<ZawodnikOgloszenie>()
+            .HasKey(zo => new { zo.ZawodnikId, zo.OgloszenieId });
+
+        // Relacja pomiędzy ZawodnikOgloszenie a Zawodnik
+        modelBuilder.Entity<ZawodnikOgloszenie>()
+            .HasOne(zo => zo.Zawodnik)
+            .WithMany(z => z.ZawodnikOgloszenie)
+            .HasForeignKey(zo => zo.ZawodnikId);
+
+        // Relacja pomiędzy ZawodnikOgloszenie a OgloszeniaModel
+        modelBuilder.Entity<ZawodnikOgloszenie>()
+            .HasOne(zo => zo.Ogloszenie)
+            .WithMany(o => o.ZawodnikOgloszenie)
+            .HasForeignKey(zo => zo.OgloszenieId);
+
+        // Relacja pomiędzy ApplicationUser a ZawodnikOgloszenie
+        modelBuilder.Entity<ApplicationUser>()
+            .HasMany(u => u.ZawodnikOgloszenie)
+            .WithOne(zo => zo.Zawodnik)
+            .HasForeignKey(zo => zo.ZawodnikId);
     }
 
-public DbSet<KlubSportowy.Models.MeczModel> MeczModel { get; set; } = default!;
+    // DbSet dla modeli
+    public DbSet<MeczModel> MeczModel { get; set; } = default!;
+    public DbSet<StatystykiZawodnikaMeczModel> StatystykiZawodnikaMeczModel { get; set; } = default!;
+    public DbSet<ZawodnikModel> ZawodnikModel { get; set; } = default!;
+    public DbSet<OgloszeniaModel> OgloszeniaModel { get; set; } = default!;
+    public DbSet<ZawodnikOgloszenie> ZawodnikOgloszenie { get; set; } = default!;
 
-public DbSet<KlubSportowy.Models.StatystykiZawodnikaMeczModel> StatystykiZawodnikaMeczModel { get; set; } = default!;
+    public async Task RemoveExpiredOgloszeniaAsync()
+    {
+        var expiredOgloszenia = await OgloszeniaModel
+            .Where(o => o.DataUsunieciaOgloszenia < DateTime.Now)
+            .ToListAsync();
 
-public DbSet<KlubSportowy.Models.ZawodnikModel> ZawodnikModel { get; set; } = default!;
+        OgloszeniaModel.RemoveRange(expiredOgloszenia);
+        await SaveChangesAsync();
+    }
 }
-
-
-

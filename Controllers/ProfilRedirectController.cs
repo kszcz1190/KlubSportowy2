@@ -6,47 +6,54 @@ using System.Threading.Tasks;
 using KlubSportowy.Data; // Namespace z kontekstem bazy danych i modelami
 using KlubSportowy.Models;
 using Microsoft.EntityFrameworkCore; // Namespace z modelem ZawodnikModel
+using Microsoft.AspNetCore.Authorization;
 
-public class ProfileRedirectController : Controller
+namespace KlubSportowy.Controllers
 {
-    private readonly AuthDbContext _context;
-    private readonly UserManager<ApplicationUser> _userManager;
-
-    public ProfileRedirectController(AuthDbContext context, UserManager<ApplicationUser> userManager)
+    [Authorize]
+    public class ProfileRedirectController : Controller
     {
-        _context = context;
-        _userManager = userManager;
-    }
+   
+        private readonly AuthDbContext _context;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-    public async Task<IActionResult> RedirectToZawodnik()
-    {
-        // Pobierz bieżącego użytkownika
-        var user = await _userManager.GetUserAsync(User);
-
-        if (user == null)
+        public ProfileRedirectController(AuthDbContext context, UserManager<ApplicationUser> userManager)
         {
-            // Przekierowanie do strony logowania, jeśli użytkownik nie jest zalogowany
-            return RedirectToAction("Login", "Account");
+            _context = context;
+            _userManager = userManager;
         }
 
-        // Znajdź model ZawodnikModel, który jest powiązany z tym użytkownikiem
-        var zawodnik = await _context.ZawodnikModel
-            .FirstOrDefaultAsync(z => z.ApplicationUserId == user.Id);
-
-        if (zawodnik != null)
+        public async Task<IActionResult> RedirectToZawodnik()
         {
-            // Przekierowanie do szczegółów ZawodnikModel z odpowiednim id
-            return Redirect($"http://localhost:5001/ZawodnikModels/details/{zawodnik.Id}");
+            // Pobierz bieżącego użytkownika
+            var user = await _userManager.GetUserAsync(User);
+
+            if (user == null)
+            {
+                // Przekierowanie do strony logowania, jeśli użytkownik nie jest zalogowany
+                return RedirectToAction("Login", "Account");
+            }
+
+            // Znajdź model ZawodnikModel, który jest powiązany z tym użytkownikiem
+            var zawodnik = await _context.ZawodnikModel
+                .FirstOrDefaultAsync(z => z.ApplicationUserId == user.Id);
+
+            if (zawodnik != null)
+            {
+                // Przekierowanie do szczegółów ZawodnikModel z odpowiednim id
+                return Redirect($"http://localhost:5001/ZawodnikModels/details/{zawodnik.Id}");
+            }
+
+            // W przypadku braku powiązanego ZawodnikModel wyświetl informację lub przekieruj na inną stronę
+            return RedirectToAction("NoProfile", "ProfileRedirect");
         }
 
-        // W przypadku braku powiązanego ZawodnikModel wyświetl informację lub przekieruj na inną stronę
-        return RedirectToAction("NoProfile", "ProfileRedirect");
-    }
-
-    // Opcjonalna akcja na wypadek braku przypisanego profilu
-    public IActionResult NoProfile()
-    {
-        return View();
+        // Opcjonalna akcja na wypadek braku przypisanego profilu
+        public IActionResult NoProfile()
+        {
+            return View();
+        }
     }
 }
+
 

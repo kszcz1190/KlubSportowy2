@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace KlubSportowy.Migrations
 {
     [DbContext(typeof(AuthDbContext))]
-    [Migration("20241022210839_Mecze3")]
-    partial class Mecze3
+    [Migration("20241104115137_new-database")]
+    partial class newdatabase
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -192,6 +192,9 @@ namespace KlubSportowy.Migrations
 
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("ApplicationUserId")
+                        .HasColumnType("varchar(255)");
+
                     b.Property<string>("Imie")
                         .IsRequired()
                         .HasColumnType("longtext");
@@ -215,9 +218,6 @@ namespace KlubSportowy.Migrations
                     b.Property<int>("LacznaIloscZoltychKartek")
                         .HasColumnType("int");
 
-                    b.Property<int?>("MeczModelId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Nazwisko")
                         .IsRequired()
                         .HasColumnType("longtext");
@@ -234,7 +234,8 @@ namespace KlubSportowy.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("MeczModelId");
+                    b.HasIndex("ApplicationUserId")
+                        .IsUnique();
 
                     b.ToTable("ZawodnikModel");
                 });
@@ -380,7 +381,7 @@ namespace KlubSportowy.Migrations
                         .IsRequired();
 
                     b.HasOne("KlubSportowy.Models.ZawodnikModel", "ZawodnikModel")
-                        .WithMany()
+                        .WithMany("StatystykiZawodnikaZMeczu")
                         .HasForeignKey("ZawodnikModelId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -392,9 +393,11 @@ namespace KlubSportowy.Migrations
 
             modelBuilder.Entity("KlubSportowy.Models.ZawodnikModel", b =>
                 {
-                    b.HasOne("KlubSportowy.Models.MeczModel", null)
-                        .WithMany("Zawodnicy")
-                        .HasForeignKey("MeczModelId");
+                    b.HasOne("KlubSportowy.Areas.Identity.Data.ApplicationUser", "ApplicationUser")
+                        .WithOne("ZawodnikModel")
+                        .HasForeignKey("KlubSportowy.Models.ZawodnikModel", "ApplicationUserId");
+
+                    b.Navigation("ApplicationUser");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -448,11 +451,20 @@ namespace KlubSportowy.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("KlubSportowy.Areas.Identity.Data.ApplicationUser", b =>
+                {
+                    b.Navigation("ZawodnikModel")
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("KlubSportowy.Models.MeczModel", b =>
                 {
                     b.Navigation("StatystykiZawodnikow");
+                });
 
-                    b.Navigation("Zawodnicy");
+            modelBuilder.Entity("KlubSportowy.Models.ZawodnikModel", b =>
+                {
+                    b.Navigation("StatystykiZawodnikaZMeczu");
                 });
 #pragma warning restore 612, 618
         }

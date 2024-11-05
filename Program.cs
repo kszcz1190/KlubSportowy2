@@ -2,8 +2,9 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using KlubSportowy.Data;
 using KlubSportowy.Areas.Identity.Data;
-using KlubSportowy.Services; 
+using KlubSportowy.Services;
 using Microsoft.AspNetCore.Identity.UI.Services;
+using KlubSportowy.Models;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -53,9 +54,40 @@ app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
 
+//sprawdzamy czy uzytkownik jest zalogowany
+app.Use(async (context, next) =>
+{
+    if (!context.User.Identity.IsAuthenticated)
+    {
+        if (context.Request.Path.StartsWithSegments("/Identity/Account/Login") ||
+            context.Request.Path.StartsWithSegments("/"))
+        {
+            await next();
+        return;
+        }
+
+        context.Response.Redirect("/Identity/Account/Login");
+    return;
+    }
+    else
+    {
+        if(context.Request.Path.StartsWithSegments("/"))
+        {
+            context.Response.Redirect("/Identity/Account/Main");
+        }
+    }
+    await next();
+});
+
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+app.MapControllerRoute(
+    name: "OgloszeniaZawodnik",
+    pattern: "OgloszeniaZawodnik/{action=Index}/{id?}");
+app.MapControllerRoute(
+    name: "Events",
+    pattern: "Events/{action=Index}/{id?}");
 app.MapRazorPages();
 
 app.Run();

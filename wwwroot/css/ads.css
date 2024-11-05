@@ -1,0 +1,76 @@
+﻿#container_ogloszeniaTrener, #container_OgloszeniaZawodnik {
+    background-color: #DBB8EB;
+    border-radius: 10px;
+    padding: 50px;
+    margin: 50px auto;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+h2 {
+    color: white;
+    font-weight: 300;
+    text-align: center;
+}
+.titleAds{
+border-bottom: 1px solid black;
+}
+    .titleAds label {
+        font-size: 30px;
+        font-weight: 300;
+    }
+
+    .titleAds textarea{
+        background-color: #DBB8EB;
+    }
+
+#buttonOgloszenie {
+    margin-top: 80px;
+    display:block;
+    width: 100%;
+    padding: 10px;
+    background-color: #370365;
+    border: none;
+    color:white;
+
+}
+#rodzajOgloszenia {
+    border-bottom: 1px solid black;
+
+}
+
+#rodzajOgloszenia button {
+    border: none;
+    background-color: #DBB8EB;
+    font-size: 20px;
+    display: inline-block;
+}
+
+.ogloszenie-item {
+    background-color: #D9D9D9;
+    margin: 10px;
+    position:relative;
+}
+    .ogloszenie-item p {
+        padding-left: 10px;
+    }
+    .ogloszenie-item button {
+        position: absolute;
+        right: 10px;
+        top: 20px;
+        padding: 5px;
+        background-color: #370365;
+        color: white;
+        border: none;
+    }
+        .ogloszenie-item button:hover {
+            background-color: #DBB8EB;
+            color:black;
+        }
+
+        .bold {
+            font-weight:bold;
+        }
+

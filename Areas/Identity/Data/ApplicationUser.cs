@@ -24,6 +24,6 @@ public class ApplicationUser : IdentityUser
     public DateTime DateOfBirth { get; set; }
 
     public ZawodnikModel ZawodnikModel { get; set; }
-
+    public virtual ICollection<ZawodnikOgloszenie> ZawodnikOgloszenie { get; set; } = new List<ZawodnikOgloszenie>();
 }
 

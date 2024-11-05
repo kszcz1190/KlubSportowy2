@@ -1,0 +1,41 @@
+﻿@using System.Security.Claims
+@model List<KlubSportowy.Models.OgloszeniaModel>
+@{
+    ViewData["Title"] = "Ogłoszenia";
+    Layout = "~/Areas/Identity/Pages/_KlubLayout.cshtml";
+}
+
+<link href="~/css/ads.css" rel="stylesheet" />
+
+<h2>Ogłoszenia</h2>
+<div id="container_OgloszeniaZawodnik">
+    <div id="rodzajOgloszenia">
+        <form method="post" asp-action="Filter">
+            <button type="submit" name="filter" value="Wszystkie" onclick="makeBold(this)">WSZYSTKIE</button>
+            <button type="submit" name="filter" value="Przeczytane" onclick="makeBold(this)">PRZECZYTANE</button>
+            <button type="submit" name="filter" value="Nieprzeczytane" onclick="makeBold(this)">NIEPRZECZYTANE</button>
+        </form>
+    </div>
+
+    <div class="ogloszenie">
+        @foreach (var ogloszenie in Model)
+        {
+            var isRead = ogloszenie.ZawodnikOgloszenie.Any(z => z.ZawodnikId == User.FindFirstValue(ClaimTypes.NameIdentifier) && z.IsRead);
+                <div class="ogloszenie-item @(isRead ? "Przeczytane" : "Nieprzeczytane")">
+                    <p>@ogloszenie.Tresc</p>
+                    <p>Data dodania: @ogloszenie.DataDodania</p>
+                @if (!isRead)
+                {
+                            <form method="post" asp-action="MarkAsRead" asp-route-id="@ogloszenie.Id">
+                                <button type="submit">Oznacz jako przeczytane</button>
+                            </form>
+                }
+                </div>
+        }
+    </div>
+</div>
+<script>
+    function makeBold(button) {
+        button.classList.add("bold");
+    }
+</script>
