@@ -55,6 +55,11 @@ public class AuthDbContext : IdentityDbContext<ApplicationUser>
             .HasMany(u => u.ZawodnikOgloszenie)
             .WithOne(zo => zo.Zawodnik)
             .HasForeignKey(zo => zo.ZawodnikId);
+
+        modelBuilder.Entity<WydarzenieModel>()
+                .HasOne(w => w.MeczModel)
+                .WithOne(m => m.Wydarzenie)
+                .HasForeignKey<WydarzenieModel>(w => w.MeczModelId);
     }
 
     // DbSet dla modeli
@@ -63,6 +68,7 @@ public class AuthDbContext : IdentityDbContext<ApplicationUser>
     public DbSet<ZawodnikModel> ZawodnikModel { get; set; } = default!;
     public DbSet<OgloszeniaModel> OgloszeniaModel { get; set; } = default!;
     public DbSet<ZawodnikOgloszenie> ZawodnikOgloszenie { get; set; } = default!;
+    public DbSet<WydarzenieModel> WydarzenieModel { get; set; } = default!;
 
     public async Task RemoveExpiredOgloszeniaAsync()
     {

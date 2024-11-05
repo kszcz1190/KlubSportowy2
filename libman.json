@@ -1,0 +1,29 @@
+{
+  "version": "1.0",
+  "defaultProvider": "cdnjs",
+  "libraries": [{
+  "provider": "cdnjs",
+  "library": "jquery@3.6.0",
+  "destination": "wwwroot/lib/jquery/"
+}
+,
+
+{
+  "provider": "cdnjs",
+  "library": "moment.js@2.29.1",
+  "destination": "wwwroot/lib/moment.js/"
+}
+,
+{
+  "provider": "cdnjs",
+  "library": "fullcalendar@6.1.15",
+  "destination": "wwwroot/lib/fullcalendar/"
+}
+,
+{
+  "provider": "cdnjs",
+  "library": "fullcalendar@6.1.15",
+  "destination": "wwwroot/lib/fullcalendar/"
+}
+]
+}

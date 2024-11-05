@@ -4,6 +4,7 @@ using KlubSportowy.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace KlubSportowy.Migrations
 {
     [DbContext(typeof(AuthDbContext))]
-    partial class AuthDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241105204517_tabelawydarzenia")]
+    partial class tabelawydarzenia
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -202,44 +205,6 @@ namespace KlubSportowy.Migrations
                     b.HasIndex("ZawodnikModelId");
 
                     b.ToTable("StatystykiZawodnikaMeczModel");
-                });
-
-            modelBuilder.Entity("KlubSportowy.Models.WydarzenieModel", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<DateTime>("DataWydarzenia")
-                        .HasColumnType("Date");
-
-                    b.Property<int?>("MeczModelId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("MiejsceWydarzenia")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("NazwaWydarzenia")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("OpisWydarzenia")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("TypWydarzenia")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("MeczModelId")
-                        .IsUnique();
-
-                    b.ToTable("WydarzenieModel");
                 });
 
             modelBuilder.Entity("KlubSportowy.Models.ZawodnikModel", b =>
@@ -467,15 +432,6 @@ namespace KlubSportowy.Migrations
                     b.Navigation("ZawodnikModel");
                 });
 
-            modelBuilder.Entity("KlubSportowy.Models.WydarzenieModel", b =>
-                {
-                    b.HasOne("KlubSportowy.Models.MeczModel", "MeczModel")
-                        .WithOne("Wydarzenie")
-                        .HasForeignKey("KlubSportowy.Models.WydarzenieModel", "MeczModelId");
-
-                    b.Navigation("MeczModel");
-                });
-
             modelBuilder.Entity("KlubSportowy.Models.ZawodnikModel", b =>
                 {
                     b.HasOne("KlubSportowy.Areas.Identity.Data.ApplicationUser", "ApplicationUser")
@@ -566,8 +522,6 @@ namespace KlubSportowy.Migrations
             modelBuilder.Entity("KlubSportowy.Models.MeczModel", b =>
                 {
                     b.Navigation("StatystykiZawodnikow");
-
-                    b.Navigation("Wydarzenie");
                 });
 
             modelBuilder.Entity("KlubSportowy.Models.OgloszeniaModel", b =>
