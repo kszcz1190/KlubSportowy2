@@ -3,9 +3,21 @@
 
 @inject SignInManager<ApplicationUser> SignInManager
 @inject UserManager<ApplicationUser> UserManager
+
 @{
     var currentPath = Context.Request.Path;
+    var userRoles = new List<string>();
+
+    if (User.Identity.IsAuthenticated)
+    {
+        var user = UserManager.GetUserAsync(User).Result; // Uzyskujemy użytkownika, tylko jeśli jest zalogowany
+        if (user != null)
+        {
+            userRoles = UserManager.GetRolesAsync(user).Result.ToList(); // Uzyskujemy role użytkownika
+        }
+    }
 }
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -36,10 +48,6 @@
                     <button id="logout" type="submit" class="btn btn-link">Wyloguj</button>
                 </form>
             }
-            else
-            {
-                <a id="login" asp-area="Identity" asp-page="/Account/Login" class="btn btn-link">Zaloguj</a>
-            }
         </div>
     </header>
 
@@ -48,15 +56,30 @@
             <ul class="navbar-nav">
                 @if (User.Identity.IsAuthenticated)
                 {
-                    <li class="nav-item"><a asp-controller="OgloszeniaZawodnik" asp-action="Index" class="nav-link">OGŁOSZENIA</a></li>
-                    <li class="nav-item"><a asp-controller="StatystykiZawodnikaMeczModels" asp-action="Index" class="nav-link">STATYSTYKI</a></li>
-                    <li class="nav-item"><a asp-controller="Kalendarz" asp-action="Index" class="nav-link">KALENDARZ</a></li>
-                    <li class="nav-item"><a asp-controller="Sklep" asp-action="Index" class="nav-link">Sklep</a></li>
+                    @* Wyświetlanie nawigacji dla zawodnika *@
+                    @if (userRoles.Contains("Zawodnik"))
+                    {
+                        <li class="nav-item"><a asp-controller="OgloszeniaZawodnik" asp-action="Index" class="nav-link">OGŁOSZENIA</a></li>
+                        <li class="nav-item"><a asp-controller="StatystykiZawodnikaMeczModels" asp-action="Index" class="nav-link">STATYSTYKI</a></li>
+                        <li class="nav-item"><a asp-controller="Kalendarz" asp-action="Index" class="nav-link">KALENDARZ</a></li>
+                    }
+                    @* Wyświetlanie nawigacji dla trenera *@
+                    else if (userRoles.Contains("Trener"))
+                    {
+                        <li class="nav-item"><a asp-area="Identity" asp-page="/Ogloszenia/OgloszeniaTrener" class="nav-link">DODAJ OGŁOSZENIE</a></li>
+                        <li class="nav-item"><a asp-area="Identity" asp-page="/Account/Register" class="nav-link">DODAJ UŻYTKOWNIKA</a></li>
+                        <li class="nav-item"><a asp-controller="ZawodnikModels" asp-action="Index" class="nav-link">STATYSTYKI ZAWODNIK</a></li>
+                        <li class="nav-item"><a asp-controller="MeczModels" asp-action="Index" class="nav-link">STATYSTYKI MECZ</a></li>
+                        <li class="nav-item"><a asp-controller="StatystykiZawodnikaMeczModels" asp-action="Index" class="nav-link">STATYSTYKI ZAWODNIKA MECZ</a></li>
+                        <li class="nav-item"><a asp-controller="WydarzenieModels" asp-action="Index" class="nav-link">DODAJ WYDARZENIE</a></li>
+                        <li class="nav-item"><a asp-controller="Sklep" asp-action="Index" class="nav-link">SKLEP</a></li>
+                        <li class="nav-item"><a asp-controller="Kalendarz" asp-action="Index" class="nav-link">KALENDARZ</a></li>
+                    }
                 }
                 else
                 {
-                    <li class="nav-item"><a class="nav-link" href="/Kalendarz">KALENDARZ</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/StatystykiZawodnikaMeczModels">STATYSTYKI</a></li>
+                    <li class="nav-item"><a asp-controller="Kalendarz" asp-action="Index" class="nav-link">KALENDARZ</a></li>
+                    <li class="nav-item"><a asp-area="Identity" asp-page="/Account/Login" class="nav-link">ZALOGUJ SIĘ</a></li>
                 }
             </ul>
         </div>

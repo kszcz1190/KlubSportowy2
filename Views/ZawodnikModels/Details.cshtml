@@ -3,12 +3,8 @@
 @{
     ViewData["Title"] = "Details";
 }
-
-<h1>Details</h1>
-
-<div>
-    <h4>ZawodnikModel</h4>
-    <hr />
+<link href="~/css/myStats.css" rel="stylesheet" />
+<div id="container_statystyki">
     <dl class="row">
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Imie)
@@ -83,8 +79,9 @@
             @Html.DisplayFor(model => model.ApplicationUser.Id)
         </dd>
     </dl>
-</div>
+
 <div>
     <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
     <a asp-action="Index">Back to List</a>
+</div>
 </div>

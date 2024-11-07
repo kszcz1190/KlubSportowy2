@@ -78,9 +78,6 @@ app.MapControllerRoute(
 app.MapControllerRoute(
     name: "OgloszeniaZawodnik",
     pattern: "OgloszeniaZawodnik/{action=Index}/{id?}");
-app.MapControllerRoute(
-    name: "Events",
-    pattern: "Events/{action=Index}/{id?}");
 app.MapRazorPages();
 
 app.Run();

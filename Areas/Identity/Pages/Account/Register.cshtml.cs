@@ -122,15 +122,25 @@ namespace KlubSportowy.Areas.Identity.Pages.Account
             public string Role { get; set; }
         }
 
-
+        
         public async Task OnGetAsync(string returnUrl = null)
         {
-            if (User.Identity.IsAuthenticated)
+            if (!User.Identity.IsAuthenticated)
             {
+                // Jeśli nie jest zalogowany, przekierowanie do strony logowania
+                Response.Redirect("/Account/Login");
+            }
+            var user = await _userManager.GetUserAsync(User);
+            if (user == null || !await _userManager.IsInRoleAsync(user, "Trener"))
+            {
+                // Jeśli nie jest trenerem, przekierowanie do strony głównej
                 Response.Redirect("/");
             }
+
+            // Ustawienie ReturnUrl i pobranie zewnętrznych dostawców logowania
             ReturnUrl = returnUrl;
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
+
         }
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
@@ -183,17 +193,17 @@ namespace KlubSportowy.Areas.Identity.Pages.Account
                     await _userManager.AddToRoleAsync(user, selectedRole);
 
                     // Potwierdzenie e-maila i dalsze akcje
-                    var userId = await _userManager.GetUserIdAsync(user);
-                    var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-                    code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
-                    var callbackUrl = Url.Page(
-                        "/Account/ConfirmEmail",
-                        pageHandler: null,
-                        values: new { area = "Identity", userId = userId, code = code, returnUrl = returnUrl },
-                        protocol: Request.Scheme);
+                    //var userId = await _userManager.GetUserIdAsync(user);
+                    //var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+                    //code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
+                    //var callbackUrl = Url.Page(
+                    //    "/Account/ConfirmEmail",
+                    //    pageHandler: null,
+                    //    values: new { area = "Identity", userId = userId, code = code, returnUrl = returnUrl },
+                    //    protocol: Request.Scheme);
 
-                    await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
-                        $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+                    //await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
+                    //    $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
 
                     if (_userManager.Options.SignIn.RequireConfirmedAccount)
                     {

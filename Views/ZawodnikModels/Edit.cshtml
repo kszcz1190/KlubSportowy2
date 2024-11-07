@@ -3,11 +3,8 @@
 @{
     ViewData["Title"] = "Edit";
 }
-
-<h1>Edit</h1>
-
-<h4>ZawodnikModel</h4>
-<hr />
+<link href="~/css/myStats.css" rel="stylesheet" />
+<div id="container_statystyki">
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Edit">
@@ -83,7 +80,7 @@
 <div>
     <a asp-action="Index">Back to List</a>
 </div>
-
+</div>
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

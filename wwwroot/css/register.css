@@ -1,5 +1,4 @@
 ﻿.container_register {
-    color:black;
     margin: 50px auto;
     position: relative;
     background-color:rgba(0,0,0,0.6);
@@ -9,6 +8,7 @@
     align-items: center;
     padding: 30px;
     width: fit-content;
+    color:black;
 }
 
 .form-floating {
