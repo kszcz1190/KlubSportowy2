@@ -1,0 +1,58 @@
+﻿.container_dodajWydarzenie
+{
+    background-color:rgba(0,0,0,0.6);
+    color:white;
+    padding: 20px;
+    position:relative;
+    margin:30px auto;
+    width:fit-content;
+}
+.form-group{
+    min-width:500px;
+}
+.container_dodajWydarzenie p {
+    background-color: white;
+    border-radius: 30px;
+    width: 250px;
+    font-size: 18px;
+    padding: 8px;
+    margin: 20px;
+    text-align: center;
+    transition: all 0.5s ease;
+}
+        .container_dodajWydarzenie p:hover{
+            background-color:gray;
+        }
+            .container_dodajWydarzenie p a:hover{
+                color:white;
+            }
+            .container_dodajWydarzenie p a {
+                text-decoration: none;
+                color: black;
+            }
+
+        .table {
+            color: white;
+        }
+.form-group input:first-child {
+    position:absolute;
+    right: 20px;
+    background-color: white;
+    color: black;
+    border: none;
+    border-radius: 20px;
+    font-size: 20px;
+    margin-top: 20px;
+    width: 200px;
+    transition: all 0.5s ease;
+}
+.form-group input:first-child:hover{
+    background-color:gray;
+    color:white;
+}
+.button {
+    margin: 20px;
+}
+.button a {
+    color: white;
+}

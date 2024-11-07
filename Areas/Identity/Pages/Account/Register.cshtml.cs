@@ -22,7 +22,7 @@ using Microsoft.Extensions.Logging;
 
 namespace KlubSportowy.Areas.Identity.Pages.Account
 {
-    [Authorize]
+    
     public class RegisterModel : PageModel
     {
         private readonly SignInManager<ApplicationUser> _signInManager;
@@ -31,13 +31,15 @@ namespace KlubSportowy.Areas.Identity.Pages.Account
         private readonly IUserEmailStore<ApplicationUser> _emailStore;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
+        private readonly RoleManager<IdentityRole> _roleManager;
 
         public RegisterModel(
             UserManager<ApplicationUser> userManager,
             IUserStore<ApplicationUser> userStore,
             SignInManager<ApplicationUser> signInManager,
             ILogger<RegisterModel> logger,
-            IEmailSender emailSender)
+            IEmailSender emailSender,
+            RoleManager<IdentityRole> roleManager)
         {
             _userManager = userManager;
             _userStore = userStore;
@@ -45,6 +47,7 @@ namespace KlubSportowy.Areas.Identity.Pages.Account
             _signInManager = signInManager;
             _logger = logger;
             _emailSender = emailSender;
+            _roleManager = roleManager;
         }
 
         /// <summary>
@@ -113,6 +116,10 @@ namespace KlubSportowy.Areas.Identity.Pages.Account
             [DataType(DataType.Date)]
             [Display(Name = "Date of Birth")]
             public DateTime DateOfBirth { get; set; }
+
+            [Required]
+            [Display(Name = "Role")]
+            public string Role { get; set; }
         }
 
 
@@ -130,18 +137,23 @@ namespace KlubSportowy.Areas.Identity.Pages.Account
         {
             returnUrl ??= Url.Content("~/");
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
+
             if (ModelState.IsValid)
             {
                 var user = CreateUser();
 
-                user.FirstName = Input.FirstName; 
+                // Przypisanie właściwości użytkownika
+                user.FirstName = Input.FirstName;
                 user.LastName = Input.LastName;
                 user.DateOfBirth = Input.DateOfBirth;
+
+                // Walidacja daty urodzenia
                 if (Input.DateOfBirth > DateTime.Today)
                 {
                     ModelState.AddModelError(string.Empty, "Date of birth cannot be in the future.");
                     return Page();
                 }
+
                 var minimumAge = 18;
                 if (Input.DateOfBirth > DateTime.Today.AddYears(-minimumAge))
                 {
@@ -149,14 +161,28 @@ namespace KlubSportowy.Areas.Identity.Pages.Account
                     return Page();
                 }
 
+                // Ustawienie nazwy użytkownika i e-maila
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
+
+                // Tworzenie użytkownika
                 var result = await _userManager.CreateAsync(user, Input.Password);
 
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User created a new account with password.");
 
+                    // Przypisanie roli na podstawie wyboru z formularza
+                    var selectedRole = Input.Role ?? "Zawodnik"; // domyślna rola to "Zawodnik"
+                    if (!await _roleManager.RoleExistsAsync(selectedRole))
+                    {
+                        await _roleManager.CreateAsync(new IdentityRole(selectedRole));
+                    }
+
+                    // Przypisz rolę do użytkownika
+                    await _userManager.AddToRoleAsync(user, selectedRole);
+
+                    // Potwierdzenie e-maila i dalsze akcje
                     var userId = await _userManager.GetUserIdAsync(user);
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
@@ -179,15 +205,18 @@ namespace KlubSportowy.Areas.Identity.Pages.Account
                         return LocalRedirect(returnUrl);
                     }
                 }
+
+                // Obsługa błędów tworzenia konta
                 foreach (var error in result.Errors)
                 {
                     ModelState.AddModelError(string.Empty, error.Description);
                 }
             }
 
-            // If we got this far, something failed, redisplay form
+            // Jeśli coś poszło nie tak, wyświetl ponownie formularz
             return Page();
         }
+
 
         private ApplicationUser CreateUser()
         {

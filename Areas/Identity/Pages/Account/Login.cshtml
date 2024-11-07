@@ -3,7 +3,7 @@
 
 @{
     ViewData["Title"] = "Log in";
-    Layout = "~/Areas/Identity/Pages/_KlubLayout.cshtml";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <link rel="stylesheet" href="~/KlubSportowy.styles.css" asp-append-version="true" />
@@ -11,13 +11,13 @@
 
 <div class="container_login">
     <div id="icon">
-        <img src="~/images/user2.png" alt="Icon" />
+        <img src="~/images/user.png" alt="Icon" />
     </div>
     <form id="account" method="post">
    
         <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
         <div class="form-floating mb-3">
-            <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" placeholder="name@example.com" />
+            <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" placeholder="name@example.com"/>
             <label asp-for="Input.Email" class="form-label">Email</label>
             <span asp-validation-for="Input.Email" class="text-danger"></span>
         </div>

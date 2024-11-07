@@ -2,12 +2,10 @@
 @model List<KlubSportowy.Models.OgloszeniaModel>
 @{
     ViewData["Title"] = "Ogłoszenia";
-    Layout = "~/Areas/Identity/Pages/_KlubLayout.cshtml";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <link href="~/css/ads.css" rel="stylesheet" />
-
-<h2>Ogłoszenia</h2>
 <div id="container_OgloszeniaZawodnik">
     <div id="rodzajOgloszenia">
         <form method="post" asp-action="Filter">
@@ -27,7 +25,7 @@
                 @if (!isRead)
                 {
                             <form method="post" asp-action="MarkAsRead" asp-route-id="@ogloszenie.Id">
-                                <button type="submit">Oznacz jako przeczytane</button>
+                                <button type="submit">Przeczytane</button>
                             </form>
                 }
                 </div>

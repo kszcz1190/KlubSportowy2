@@ -1,5 +1,5 @@
 ﻿.container_login {
-    background-color: #DBB8EB;
+    background-color: lavender;
     border-radius: 50px;
     width: fit-content;
     height: 300px;
@@ -9,12 +9,7 @@
     justify-content: center;
     align-items: center;
     position: relative;
-}
-
-input.form-control {
-    background-color: #A16ECE;
-    padding: 5px;
-    color: white;
+    color:black;
 }
 
 
@@ -24,32 +19,37 @@ input.form-control {
 }
 
 a {
-    color: #370365;
+    color: black;
     text-decoration: underline;
     font-weight: bold;
+}
+a:hover{
+    color: lightcoral;
 }
 
 .submit_login {
     position: absolute;
-    bottom: -20px;
+    bottom: -90px;
     padding: 10px;
     border-radius: 30px;
     width: 200px;
-    background: rgb(161,110,206);
-    background: linear-gradient(180deg, rgba(161,110,206,1) 13%, rgba(219,184,235,1) 100%);
+    background-color:white;
     border: none;
     font-weight: bold;
 }
 
-#icon {
-    position: absolute;
-    top: -50px;
-    width: 120px;
-    height: 120px;
-    border-radius: 100px;
-    background-color: white;
-    display: flex;
-}
+    .submit_login:hover {
+        background-color: lightgray;
+    }
+
+    #icon {
+        position: absolute;
+        top: -80px;
+        width: 120px;
+        height: 120px;
+        border-radius: 100px;
+        display: flex;
+    }
 
 img {
     border-radius: 100px;

@@ -1,0 +1,15 @@
+﻿#container_calendar{
+    max-width:700px;
+    margin: 20px auto;
+    padding:20px;
+    background-color:rgba(0,0,0,0.6);
+}
+#calendar {
+    max-width: 600px;
+    margin: 20px auto;
+}
+
+#calendar a{
+color:white;
+text-decoration:none;
+}

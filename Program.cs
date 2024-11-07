@@ -63,25 +63,18 @@ app.Use(async (context, next) =>
             context.Request.Path.StartsWithSegments("/"))
         {
             await next();
-        return;
+            return;
         }
 
         context.Response.Redirect("/Identity/Account/Login");
-    return;
-    }
-    else
-    {
-        if(context.Request.Path.StartsWithSegments("/"))
-        {
-            context.Response.Redirect("/Identity/Account/Main");
-        }
+        return;
     }
     await next();
 });
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Kalendarz}/{action=Index}/{id?}");
 app.MapControllerRoute(
     name: "OgloszeniaZawodnik",
     pattern: "OgloszeniaZawodnik/{action=Index}/{id?}");

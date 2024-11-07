@@ -10,44 +10,35 @@
     align-items:center;
 }
 
-a {
-    text-decoration: none;
-    color: white;
-    border: 2px solid white;
-    padding: 10px;
-    font-size: 20px;
-    border-radius: 50px;
-    margin: 50px;
-}
-
-a:hover{
-    background-color: aliceblue;
-    color: purple;
-}
 
 .changePassword, .changeEmail {
     margin: 50px auto;
     border-radius: 20px;
     padding: 20px;
-    background-color: #DBB8EB;
+    background-color: rgba(0,0,0,0.6);
     display: flex;
     width: fit-content;
     text-align: center;
 }
-    .changePassword button, .changeEmail button{
-        background-color: #370365;
+    .changePassword button, .changeEmail button {
+        background-color: white;
         border-radius: 50px;
         margin-top: 20px;
         border: none;
         font-size: 20px;
-        color: white;
+        color:black;
         padding: 10px;
-        width: 150px
+        width: 150px ;
+        transition: all 0.5s ease;
     }
-.form-group{
-    display:flex;
-    margin:10px;
-}
+        .changePassword button:hover, .changeEmail button:hover {
+            background-color: gray;
+            color: white;
+        }
+        .form-group {
+            display: flex;
+            margin: 10px;
+        }
 
     .form-group label {
         font-size: 20px;

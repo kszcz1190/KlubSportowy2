@@ -1,11 +1,12 @@
 ﻿.container_register {
+    color:black;
     margin: 50px auto;
     position: relative;
-    background-color: #DBB8EB;
+    background-color:rgba(0,0,0,0.6);
     border-radius: 50px;
     display: flex;
     justify-content: center;
-    align-items:center;
+    align-items: center;
     padding: 30px;
     width: fit-content;
 }
@@ -33,13 +34,18 @@
     bottom: -60px;
     right: 0px;
     width: 237px;
-    background-color: #370365;
+    background-color: white;
     border: none;
     border-radius: 10px;
-    color: white;
+    color: black;
     font-size: 30px;
+    transition: all 0.5s ease;
 }
+    .submit_register:hover{
+        background-color:gray;
+        color:white;
+    }
 
-span {
-    white-space: nowrap;
-}
+    span {
+        white-space: nowrap;
+    }

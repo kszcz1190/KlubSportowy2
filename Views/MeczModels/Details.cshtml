@@ -4,11 +4,9 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
+<link href="~/css/wydarzenia.css" rel="stylesheet" />
 
-<div>
-    <h4>MeczModel</h4>
-    <hr />
+<div class="container_dodajWydarzenie">
     <dl class="row">
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Druzyna)
@@ -60,7 +58,8 @@
         </dd>
     </dl>
 </div>
-<div>
+<div class="button">
     <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
     <a asp-action="Index">Back to List</a>
 </div>
+

@@ -1,11 +1,11 @@
 ﻿@model IEnumerable<KlubSportowy.Models.MeczModel>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Statystyki ogólne";
 }
+<link href="~/css/myStats.css" rel="stylesheet" />
 
-<h1>Index</h1>
-
+<div id="container_statystyki_ogolne">
 <p>
     <a asp-action="Create">Create New</a>
 </p>
@@ -75,3 +75,4 @@
 }
     </tbody>
 </table>
+</div>

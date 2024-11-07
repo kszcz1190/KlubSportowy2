@@ -18,58 +18,27 @@ html {
 }
 
 body {
-    margin-bottom: 60px;
-    background: linear-gradient(180deg, rgba(55,3,101,1) 0%, rgba(208,109,198,1) 65%, rgba(175,98,98,1) 100%)
+    background-image: linear-gradient(rgba(0, 0, 0, 1), rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.9)),url('../images/from-ball-white-line.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    color: white;
+    text-decoration: none;
+    list-style: none;
 }
 .logo {
     text-align: center;
-    margin: 40px auto;
-    width: 494px;
-    height: 90px;
+    margin: 30px auto;
+    width: 450px;
+    height: 75px;
     padding:10px;
-    border: 2px solid #9F4EE7;
+    border: 2px solid white;
     border-radius: 100px;
-    font-size: 50px;
+    font-size: 40px;
     font-weight: 200;
     color: white;
 }
-#container_guest {
-    display: flex;
-    flex-wrap: nowrap;
-    margin: 150px auto;
-    justify-content: center;
-    align-items: center;
-}
 
-.item {
-    display: inline-block;
-    width: 200px;
-    height: 200px;
-    margin: 10px;
-    border-radius: 50px;
-    text-align: center;
-}
-
-.mainButtons {
-    font-size: 120px;
-}
-
-.buttons {
-    border-radius: 50px;
-    width: 200px;
-    height: 200px;
-    background-color: #D6C1E8;
-    border: none;
-    display: block;
-}
-
-.label_buttons {
-    font-size: 30px;
-    color: white;
-    font-weight: bold;
-    display: block;
-    margin-top: 10px;
-}
 
 #manage {
     position: absolute;
@@ -79,11 +48,11 @@ body {
     color: white;
     font-size: 40px;
     border: 3px solid white;
-    background-color: #D06DC6;
+    background-color: black;
     border-radius: 100px;
-    padding: 5px;
-    width: 80px;
-    height: 80px;
+    padding: 2px;
+    width: 60px;
+    height: 60px;
     display:flex;
     align-items:center;
     justify-content: center;
@@ -93,15 +62,47 @@ body {
     position: absolute;
     right: 20px;
     top: 20px;
-    border: 2px solid #9F4EE7;
+    border: 2px solid white;
     color: white;
     font-weight: 400;
     font-size: 20px;
     padding: 10px;
     border-radius: 40px;
     width: 150px;
-    background-color: #370365;
+    background-color: black;
     text-decoration: none;
     text-align:center;
 }
 
+nav.navbar {
+    border-bottom: 1px solid white;
+}
+.navbar-nav {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+li.nav-item a {
+    color: white;
+    display: block;
+    padding: 10px;
+    font-size:20px;
+}
+.nav-item {
+    flex:1;
+    text-align:center;
+}
+li.nav-item {
+    transition: all 0.5s ease;
+}
+li.nav-item:hover {
+    background-color: lightgray;
+    cursor: pointer;
+}
+.nav-link.active {
+    background-color: lightgray;
+    color:black;
+}

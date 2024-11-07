@@ -3,9 +3,8 @@
 @{
     ViewData["Title"] = "Details";
 }
-
-<h1>Details</h1>
-
+<link href="~/css/wydarzenia.css" rel="stylesheet" />
+<div class="container_dodajWydarzenie">
 <div>
     <h4>WydarzenieModel</h4>
     <hr />
@@ -51,4 +50,5 @@
 <div>
     <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
     <a asp-action="Index">Back to List</a>
+</div>
 </div>

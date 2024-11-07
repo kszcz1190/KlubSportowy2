@@ -1,4 +1,12 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Identity
+@using KlubSportowy.Areas.Identity.Data
+
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+@{
+    var currentPath = Context.Request.Path;
+}
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -9,19 +17,55 @@
     <link rel="stylesheet" href="~/KlubSportowy.styles.css" asp-append-version="true" />
 </head>
 <body>
-    <header>
-        <nav>
-            <div>
-                <partial name="_LoginPartial.cshtml"/>
-            </div>
-                
-        </nav>
+    <header class="d-flex justify-content-between align-items-center p-3">
+        <div>
+            @if (SignInManager.IsSignedIn(User))
+            {
+                <a id="manage" href="@Url.Action("RedirectToZawodnik", "ProfileRedirect")">
+                    @UserManager.GetUserName(User)?.FirstOrDefault()
+                </a>
+            }
+        </div>
+
+        <h1 class="logo text-center">KLUB SPORTOWY</h1>
+
+        <div>
+            @if (SignInManager.IsSignedIn(User))
+            {
+                <form id="logoutForm" class="d-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                    <button id="logout" type="submit" class="btn btn-link">Wyloguj</button>
+                </form>
+            }
+            else
+            {
+                <a id="login" asp-area="Identity" asp-page="/Account/Login" class="btn btn-link">Zaloguj</a>
+            }
+        </div>
     </header>
-    <div class="container">
-        <main role="main">
-            @RenderBody()
-        </main>
-    </div>
+
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <ul class="navbar-nav">
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <li class="nav-item"><a asp-controller="OgloszeniaZawodnik" asp-action="Index" class="nav-link">OGŁOSZENIA</a></li>
+                    <li class="nav-item"><a asp-controller="StatystykiZawodnikaMeczModels" asp-action="Index" class="nav-link">STATYSTYKI</a></li>
+                    <li class="nav-item"><a asp-controller="Kalendarz" asp-action="Index" class="nav-link">KALENDARZ</a></li>
+                    <li class="nav-item"><a asp-controller="Sklep" asp-action="Index" class="nav-link">Sklep</a></li>
+                }
+                else
+                {
+                    <li class="nav-item"><a class="nav-link" href="/Kalendarz">KALENDARZ</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/StatystykiZawodnikaMeczModels">STATYSTYKI</a></li>
+                }
+            </ul>
+        </div>
+    </nav>
+
+    <main>
+        @RenderBody()
+    </main>
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
