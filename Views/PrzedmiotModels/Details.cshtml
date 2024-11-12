@@ -1,0 +1,48 @@
+﻿@model KlubSportowy.Models.PrzedmiotModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>PrzedmiotModel</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.CenaPrzedmiotu)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.CenaPrzedmiotu)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.IloscPrzedmiotu)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.IloscPrzedmiotu)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.NazwaPrzedmiotu)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.NazwaPrzedmiotu)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.OpisPrzedmiotu)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.OpisPrzedmiotu)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.CzyDostepny)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.CzyDostepny)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

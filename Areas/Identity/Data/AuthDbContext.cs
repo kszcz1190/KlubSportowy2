@@ -79,4 +79,8 @@ public class AuthDbContext : IdentityDbContext<ApplicationUser>
         OgloszeniaModel.RemoveRange(expiredOgloszenia);
         await SaveChangesAsync();
     }
+
+public DbSet<KlubSportowy.Models.PrzedmiotModel> PrzedmiotModel { get; set; } = default!;
+
+public DbSet<KlubSportowy.Models.RezerwacjaModel> RezerwacjaModel { get; set; } = default!;
 }

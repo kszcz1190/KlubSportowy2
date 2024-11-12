@@ -1,0 +1,54 @@
+﻿@model KlubSportowy.Models.PrzedmiotModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>PrzedmiotModel</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="CenaPrzedmiotu" class="control-label"></label>
+                <input asp-for="CenaPrzedmiotu" class="form-control" />
+                <span asp-validation-for="CenaPrzedmiotu" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IloscPrzedmiotu" class="control-label"></label>
+                <input asp-for="IloscPrzedmiotu" class="form-control" />
+                <span asp-validation-for="IloscPrzedmiotu" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NazwaPrzedmiotu" class="control-label"></label>
+                <input asp-for="NazwaPrzedmiotu" class="form-control" />
+                <span asp-validation-for="NazwaPrzedmiotu" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="OpisPrzedmiotu" class="control-label"></label>
+                <input asp-for="OpisPrzedmiotu" class="form-control" />
+                <span asp-validation-for="OpisPrzedmiotu" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="CzyDostepny" /> @Html.DisplayNameFor(model => model.CzyDostepny)
+                </label>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
