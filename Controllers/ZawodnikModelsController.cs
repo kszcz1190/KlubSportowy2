@@ -158,6 +158,8 @@ namespace KlubSportowy.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+
+
         private bool ZawodnikModelExists(int id)
         {
             return _context.ZawodnikModel.Any(e => e.Id == id);
