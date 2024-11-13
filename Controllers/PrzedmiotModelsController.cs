@@ -54,15 +54,15 @@ namespace KlubSportowy.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,CenaPrzedmiotu,IloscPrzedmiotu,NazwaPrzedmiotu,OpisPrzedmiotu,CzyDostepny")] PrzedmiotModel przedmiotModel)
+        public async Task<IActionResult> Create([Bind("Id,CenaPrzedmiotu,IloscPrzedmiotu,NazwaPrzedmiotu,OpisPrzedmiotu,CzyDostepny,ZdjecieUrl")] PrzedmiotModel przedmiotModel)
         {
-            if (ModelState.IsValid)
-            {
-                _context.Add(przedmiotModel);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(przedmiotModel);
+            //if (ModelState.IsValid)
+            //{
+            _context.Add(przedmiotModel);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+            //}
+            //return View(przedmiotModel);
         }
 
         // GET: PrzedmiotModels/Edit/5
@@ -86,7 +86,7 @@ namespace KlubSportowy.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,CenaPrzedmiotu,IloscPrzedmiotu,NazwaPrzedmiotu,OpisPrzedmiotu,CzyDostepny")] PrzedmiotModel przedmiotModel)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,CenaPrzedmiotu,IloscPrzedmiotu,NazwaPrzedmiotu,OpisPrzedmiotu,CzyDostepny,ZdjecieUrl")] PrzedmiotModel przedmiotModel)
         {
             if (id != przedmiotModel.Id)
             {

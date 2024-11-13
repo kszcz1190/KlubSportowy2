@@ -1,0 +1,26 @@
+﻿
+@model KlubSportowy.Models.RezerwacjaModel
+@using KlubSportowy.Models
+@{
+    ViewData["Title"] = "Rezerwacja Przedmiotu";
+}
+
+<h2>Rezerwacja Przedmiotu</h2>
+
+<div>
+    <form asp-action="Rezerwuj" method="post">
+        <div class="form-group">
+            <label asp-for="PrzedmiotModelId">Wybierz przedmiot:</label>
+            <select asp-for="PrzedmiotModelId" class="form-control" asp-items="@(new SelectList(ViewBag.Przedmioty, "Id", "NazwaPrzedmiotu"))">
+                <option value="">-- Wybierz przedmiot --</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="ApplicationUserId">Zarezerwowane przez:</label>
+            <input asp-for="ApplicationUserId" class="form-control" readonly />
+        </div>
+
+        <button type="submit" class="btn btn-primary">Zarezerwuj</button>
+    </form>
+</div>

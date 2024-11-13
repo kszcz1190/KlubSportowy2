@@ -1,4 +1,6 @@
-﻿namespace KlubSportowy.Models
+﻿using Microsoft.Identity.Client;
+
+namespace KlubSportowy.Models
 {
     public class PrzedmiotModel
     {
@@ -8,6 +10,7 @@
         public string NazwaPrzedmiotu { get; set; }
         public string OpisPrzedmiotu { get; set; }
         public bool CzyDostepny { get; set; }
+        public string ZdjecieUrl { get; set; }
 
 
 

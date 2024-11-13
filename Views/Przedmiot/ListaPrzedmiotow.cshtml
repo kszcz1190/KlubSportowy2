@@ -1,0 +1,30 @@
+﻿@model IEnumerable<KlubSportowy.Models.PrzedmiotModel>
+
+@{
+    ViewData["Title"] = "Lista Przedmiotów";
+}
+
+<h2>Lista Przedmiotów</h2>
+
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-md-4">
+            <div class="card mb-4 shadow-sm">
+                <img src="@item.ZdjecieUrl" class="card-img-top" alt="@item.NazwaPrzedmiotu" />
+
+                <div class="card-body" style="background-color: #f8f9fa;">
+                    <h5 class="card-title text-primary">@item.NazwaPrzedmiotu</h5>
+                    <p class="card-text text-dark">@item.OpisPrzedmiotu</p>
+                    <p style="color: #28a745;"><strong>Cena:</strong> @item.CenaPrzedmiotu PLN</p>
+                    <p style="color: @(item.CzyDostepny ? "#007bff" : "#dc3545");"><strong>Dostępność:</strong> @(item.CzyDostepny ? "Dostępny" : "Niedostępny")</p>
+
+                    @if (item.CzyDostepny)
+                    {
+                        <a href="/Rezerwacja/Rezerwacja?przedmiotId=@item.Id" class="btn btn-primary">Zarezerwuj</a>
+                    }
+                </div>
+            </div>
+        </div>
+    }
+</div>
