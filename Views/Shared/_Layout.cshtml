@@ -60,6 +60,7 @@
                     @if (userRoles.Contains("Zawodnik"))
                     {
                         <li class="nav-item"><a asp-controller="OgloszeniaZawodnik" asp-action="Index" class="nav-link">OGŁOSZENIA</a></li>
+                        <li class="nav-item"><a asp-controller="Przedmiot" asp-action="ListaPrzedmiotow" class="nav-link">SKLEP</a></li>
                         <li class="nav-item"><a asp-controller="StatystykiZawodnikaMeczModels" asp-action="Index" class="nav-link">STATYSTYKI</a></li>
                         <li class="nav-item"><a asp-controller="Kalendarz" asp-action="Index" class="nav-link">KALENDARZ</a></li>
                     }
@@ -72,7 +73,7 @@
                         <li class="nav-item"><a asp-controller="MeczModels" asp-action="Index" class="nav-link">STATYSTYKI MECZ</a></li>
                         <li class="nav-item"><a asp-controller="StatystykiZawodnikaMeczModels" asp-action="Index" class="nav-link">STATYSTYKI ZAWODNIKA MECZ</a></li>
                         <li class="nav-item"><a asp-controller="WydarzenieModels" asp-action="Index" class="nav-link">DODAJ WYDARZENIE</a></li>
-                        <li class="nav-item"><a asp-controller="Sklep" asp-action="Index" class="nav-link">SKLEP</a></li>
+                        <li class="nav-item"><a asp-controller="PrzedmiotModels" asp-action="Index" class="nav-link">SKLEP</a></li>
                         <li class="nav-item"><a asp-controller="Kalendarz" asp-action="Index" class="nav-link">KALENDARZ</a></li>
                     }
                 }

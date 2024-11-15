@@ -56,3 +56,13 @@
 .button a {
     color: white;
 }
+
+.container_listaPrzedmiotow {
+    background-color: rgba(0,0,0,0.6);
+    color: white;
+    padding: 20px;
+    position: relative;
+    margin: 30px auto;
+    display:flex;
+    justify-content:center;
+}

@@ -4,11 +4,8 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
-
-<div>
-    <h4>RezerwacjaModel</h4>
-    <hr />
+<link href="~/css/wydarzenia.css" rel="stylesheet" />
+<div class="container_dodajWydarzenie">
     <dl class="row">
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.applicationUser)
@@ -23,8 +20,9 @@
             @Html.DisplayFor(model => model.przedmiotModel.Id)
         </dd>
     </dl>
-</div>
+
 <div>
     <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
     <a asp-action="Index">Back to List</a>
+</div>
 </div>

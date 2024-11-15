@@ -3,12 +3,8 @@
 @{
     ViewData["Title"] = "Edit";
 }
-
-<h1>Edit</h1>
-
-<h4>RezerwacjaModel</h4>
-<hr />
-<div class="row">
+<link href="~/css/wydarzenia.css" rel="stylesheet" />
+<div class="container_dodajWydarzenie">
     <div class="col-md-4">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -28,12 +24,12 @@
             </div>
         </form>
     </div>
-</div>
+
 
 <div>
     <a asp-action="Index">Back to List</a>
 </div>
-
+</div>
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
